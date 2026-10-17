@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   ReactFlow,
+  ReactFlowProvider,
   Background,
   Controls,
   MiniMap,
@@ -165,7 +166,8 @@ export const PipelineCanvas: React.FC<PipelineCanvasProps> = ({
   }, [currentCloud, currentTemplate]);
 
   return (
-    <div className="flex flex-col h-full bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
+    <ReactFlowProvider>
+      <div className="flex flex-col h-full bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
       
       {/* Top Controls Bar */}
       <div className="bg-slate-900/95 border-b border-slate-800 px-3 sm:px-5 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-2.5 z-10">
@@ -339,6 +341,7 @@ export const PipelineCanvas: React.FC<PipelineCanvasProps> = ({
                       protocol: nodeSpec?.protocol,
                       status,
                       statusMsg: highlightStatus?.statusMsg,
+                      isStepper: true,
                       onSelect: () => onSelectRole(role),
                     }}
                   />
@@ -395,5 +398,6 @@ export const PipelineCanvas: React.FC<PipelineCanvasProps> = ({
       </div>
 
     </div>
+    </ReactFlowProvider>
   );
 };

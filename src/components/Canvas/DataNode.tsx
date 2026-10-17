@@ -56,11 +56,13 @@ export const DataNode: React.FC<DataNodeProps> = ({ data }) => {
       onClick={data.onSelect}
       className={`w-full max-w-[360px] sm:min-w-[310px] rounded-2xl border-2 p-3 sm:p-4 shadow-xl backdrop-blur-md transition-all cursor-pointer ${getStatusBorder()}`}
     >
-      <Handle
-        type="target"
-        position={Position.Left}
-        className="!bg-slate-400 !w-3 !h-3 sm:!w-3.5 sm:!h-3.5 !border-2 !border-slate-900"
-      />
+      {!data.isStepper && (
+        <Handle
+          type="target"
+          position={Position.Left}
+          className="!bg-slate-400 !w-3 !h-3 sm:!w-3.5 sm:!h-3.5 !border-2 !border-slate-900"
+        />
+      )}
 
       {/* Role & Provider Header */}
       <div className="flex items-center justify-between gap-1.5 mb-2 sm:mb-2.5">
@@ -156,11 +158,13 @@ export const DataNode: React.FC<DataNodeProps> = ({ data }) => {
         </div>
       )}
 
-      <Handle
-        type="source"
-        position={Position.Right}
-        className="!bg-slate-400 !w-3 !h-3 sm:!w-3.5 sm:!h-3.5 !border-2 !border-slate-900"
-      />
+      {!data.isStepper && (
+        <Handle
+          type="source"
+          position={Position.Right}
+          className="!bg-slate-400 !w-3 !h-3 sm:!w-3.5 sm:!h-3.5 !border-2 !border-slate-900"
+        />
+      )}
     </div>
   );
 };
