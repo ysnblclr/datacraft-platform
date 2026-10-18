@@ -1,6 +1,6 @@
 import React from 'react';
-import { CloudProvider } from '../types';
-import { Layers, HelpCircle, Table2, Sliders, Terminal, Award, BookOpen } from 'lucide-react';
+import { CloudProvider, AppTheme } from '../types';
+import { Layers, HelpCircle, Table2, Sliders, Terminal, Award, BookOpen, Sun, Moon } from 'lucide-react';
 
 interface HeaderProps {
   currentCloud: CloudProvider;
@@ -8,6 +8,8 @@ interface HeaderProps {
   activeTab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools';
   onSelectTab: (tab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools') => void;
   score: { correct: number; total: number };
+  theme: AppTheme;
+  onToggleTheme: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,6 +18,8 @@ export const Header: React.FC<HeaderProps> = ({
   activeTab,
   onSelectTab,
   score,
+  theme,
+  onToggleTheme,
 }) => {
   return (
     <header className="border-b border-slate-800 bg-slate-900/95 backdrop-blur-md sticky top-0 z-50 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 w-full">
@@ -87,6 +91,25 @@ export const Header: React.FC<HeaderProps> = ({
                 OSS
               </button>
             </div>
+
+            {/* Theme Toggle Button (Koyu / Krem) */}
+            <button
+              onClick={onToggleTheme}
+              title={theme === 'dark' ? 'Krem Temaya Geç (Sıcak Paper/Sepia)' : 'Koyu Temaya Geç'}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold border border-slate-750 bg-slate-950 hover:border-amber-400/50 transition-all text-slate-300 shadow-inner shrink-0 cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="hidden sm:inline font-medium">Krem Tema</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-indigo-400" />
+                  <span className="hidden sm:inline font-medium text-slate-800">Koyu Tema</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
 
@@ -147,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({
             <BookOpen className="w-3.5 h-3.5 text-amber-400" />
             Sınav Araçları
             <span className="px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-bold">
-              16 DE
+              30 DE
             </span>
           </button>
 

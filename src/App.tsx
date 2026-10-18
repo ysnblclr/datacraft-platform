@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { CloudProvider, NodeRole, QuestionOption, CertificationQuestion } from './types';
+import React, { useState, useEffect } from 'react';
+import { CloudProvider, NodeRole, QuestionOption, CertificationQuestion, AppTheme } from './types';
 import { pipelineTemplates } from './data/pipelineTemplates';
 import { certificationQuestions } from './data/questionsData';
 import { rosettaMatrix } from './data/rosettaMatrix';
@@ -21,6 +21,24 @@ export function App() {
   const [currentTemplateId, setCurrentTemplateId] = useState<string>(pipelineTemplates[0].id);
   const [selectedRole, setSelectedRole] = useState<NodeRole>('ingestion');
   const [score, setScore] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 });
+
+  const [theme, setTheme] = useState<AppTheme>(() => {
+    try {
+      const saved = localStorage.getItem('datacraft-theme');
+      return saved === 'cream' || saved === 'dark' ? saved : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
+
+  useEffect(() => {
+    try {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('datacraft-theme', theme);
+    } catch {
+      // ignore
+    }
+  }, [theme]);
 
   const [highlightStatus, setHighlightStatus] = useState<{
     status: 'optimal' | 'error' | 'warning' | 'neutral';
@@ -80,6 +98,8 @@ export function App() {
         activeTab={activeTab}
         onSelectTab={setActiveTab}
         score={score}
+        theme={theme}
+        onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'cream' : 'dark'))}
       />
 
       <main className="flex-1 w-full p-2.5 sm:p-4 lg:p-6 xl:p-8 flex flex-col gap-4 sm:gap-6">

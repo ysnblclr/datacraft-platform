@@ -63,3 +63,103 @@
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* ========================================================
+   WARM CREAM THEME (Krem Tonlu Tema)
+   A soothing, warm parchment / latte developer aesthetic
+   ======================================================== */
+[data-theme="cream"] {
+  --color-slate-950: #faf6ee;
+  --color-slate-900: #f3ebdd;
+  --color-slate-800: #e5d8c3;
+  --color-slate-700: #cfbfa7;
+  --color-slate-600: #9e8a6d;
+  --color-slate-500: #7b6a53;
+  --color-slate-400: #5c4e3b;
+  --color-slate-300: #3d3326;
+  --color-slate-200: #292219;
+  --color-slate-100: #17130e;
+  --color-slate-50: #0a0806;
+
+  background-color: #faf6ee !important;
+  color: #17130e !important;
+}
+
+[data-theme="cream"] body {
+  background-color: #faf6ee !important;
+  color: #17130e !important;
+}
+
+/* Background overrides with opacity support */
+[data-theme="cream"] .bg-slate-950 { background-color: #faf6ee !important; }
+[data-theme="cream"] .bg-slate-950\/60 { background-color: rgba(250, 246, 238, 0.6) !important; }
+[data-theme="cream"] .bg-slate-950\/70 { background-color: rgba(250, 246, 238, 0.7) !important; }
+[data-theme="cream"] .bg-slate-950\/80 { background-color: rgba(250, 246, 238, 0.8) !important; }
+[data-theme="cream"] .bg-slate-950\/90 { background-color: rgba(250, 246, 238, 0.9) !important; }
+[data-theme="cream"] .bg-slate-950\/95 { background-color: rgba(250, 246, 238, 0.95) !important; }
+
+[data-theme="cream"] .bg-slate-900 { background-color: #f3ebdd !important; }
+[data-theme="cream"] .bg-slate-900\/50 { background-color: rgba(243, 235, 221, 0.5) !important; }
+[data-theme="cream"] .bg-slate-900\/60 { background-color: rgba(243, 235, 221, 0.6) !important; }
+[data-theme="cream"] .bg-slate-900\/80 { background-color: rgba(243, 235, 221, 0.8) !important; }
+[data-theme="cream"] .bg-slate-900\/90 { background-color: rgba(243, 235, 221, 0.9) !important; }
+[data-theme="cream"] .bg-slate-900\/95 { background-color: rgba(243, 235, 221, 0.95) !important; }
+
+[data-theme="cream"] .bg-slate-800 { background-color: #e5d8c3 !important; }
+[data-theme="cream"] .bg-slate-800\/60 { background-color: rgba(229, 216, 195, 0.6) !important; }
+[data-theme="cream"] .bg-slate-800\/90 { background-color: rgba(229, 216, 195, 0.9) !important; }
+
+/* Text color overrides */
+[data-theme="cream"] .text-slate-100 { color: #17130e !important; }
+[data-theme="cream"] .text-slate-200 { color: #292219 !important; }
+[data-theme="cream"] .text-slate-300 { color: #3d3326 !important; }
+[data-theme="cream"] .text-slate-400 { color: #625340 !important; }
+[data-theme="cream"] .text-slate-500 { color: #82715a !important; }
+[data-theme="cream"] .text-slate-950 { color: #faf6ee !important; }
+[data-theme="cream"] .text-white { color: #17130e !important; }
+
+/* Keep button whites legible */
+[data-theme="cream"] button[class*="bg-blue-600"],
+[data-theme="cream"] button[class*="bg-blue-600"] *,
+[data-theme="cream"] button[class*="bg-indigo-600"],
+[data-theme="cream"] button[class*="bg-indigo-600"] *,
+[data-theme="cream"] button[class*="bg-emerald-600"],
+[data-theme="cream"] button[class*="bg-emerald-600"] *,
+[data-theme="cream"] button[class*="bg-purple-600"],
+[data-theme="cream"] button[class*="bg-purple-600"] *,
+[data-theme="cream"] button[class*="bg-amber-600"],
+[data-theme="cream"] button[class*="bg-amber-600"] *,
+[data-theme="cream"] button[class*="bg-cyan-600"],
+[data-theme="cream"] button[class*="bg-cyan-600"] *,
+[data-theme="cream"] button[class*="bg-pink-600"],
+[data-theme="cream"] button[class*="bg-pink-600"] * {
+  color: #ffffff !important;
+}
+
+/* Border overrides */
+[data-theme="cream"] .border-slate-700 { border-color: #cfbfa7 !important; }
+[data-theme="cream"] .border-slate-750 { border-color: #d6c5aa !important; }
+[data-theme="cream"] .border-slate-800 { border-color: #ded0ba !important; }
+[data-theme="cream"] .border-slate-800\/80 { border-color: rgba(222, 208, 186, 0.8) !important; }
+[data-theme="cream"] .border-slate-800\/90 { border-color: rgba(222, 208, 186, 0.9) !important; }
+[data-theme="cream"] .border-slate-900 { border-color: #e5d8c3 !important; }
+
+/* Custom scrollbars for cream theme */
+[data-theme="cream"] ::-webkit-scrollbar-track {
+  background: #f3ebdd;
+}
+[data-theme="cream"] ::-webkit-scrollbar-thumb {
+  background: #cfbfa7;
+}
+[data-theme="cream"] ::-webkit-scrollbar-thumb:hover {
+  background: #b8a58a;
+}
+
+/* React Flow Canvas in Cream Theme */
+[data-theme="cream"] .react-flow {
+  background-color: #faf6ee !important;
+}
+[data-theme="cream"] .react-flow__background {
+  background-color: #faf6ee !important;
+}
+

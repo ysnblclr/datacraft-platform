@@ -178,3 +178,6 @@ export interface ExamToolDeepDive {
   primaryUseCases: string[];
   pricingTip: string;
 }
+
+export type AppTheme = 'dark' | 'cream';
+

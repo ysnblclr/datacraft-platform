@@ -699,5 +699,427 @@ export const examToolsDirectory: ExamToolDeepDive[] = [
     ],
     primaryUseCases: ['Kurumsal olay güdümlü (event-driven) mimariler', 'Gerçek zamanlı CDC (Debezium) veri akışı', 'Yüksek hacimli log ve telemetri omurgası'],
     pricingTip: 'Kullanılmayan eski partition verileri için `retention.ms` veya `retention.bytes` doğru ayarlanarak disk maliyet patlamaları önlenmelidir.'
+  },
+  // ==========================================
+  // ADDITIONAL EXPANDED TOOLS (AWS, GCP, AZURE, OSS)
+  // ==========================================
+  {
+    id: 'aws-emr',
+    name: 'Amazon EMR & EMR Serverless',
+    provider: 'aws',
+    category: 'Compute & Transform',
+    badge: 'Big Data Spark/Hadoop',
+    summary: 'Petabayt ölçeğinde açık kaynak Apache Spark, Hadoop, Presto/Trino ve Hive iş yüklerini çalıştırmak için kullanılan, EC2 Spot Instance Fleets ve EMR Serverless seçenekleriyle derin maliyet optimizasyonu sağlayan büyük veri hesaplama servisidir.',
+    coreFeatures: [
+      'Master, Core ve Task Düğüm Mimarisi: Master yönetim sağlar; Core HDFS verisi barındırır; Task düğümleri verisiz salt hesaplama yapar (Spot için ideal).',
+      'Instance Fleets: Farklı EC2 aileleri (r5, m5, c5) ve kullanılabilirlik alanlarında (AZ) Spot kapasitesi biterse otomatik On-Demand\'a fallback yeteneği.',
+      'EMR Serverless: Küme açma, boyutlandırma veya işletim sistemi yönetimi olmadan Spark ve Hive işlerini sunucusuz çalıştırma.',
+      'S3 Select & Pushdown: Veriyi S3\'ten çekerken filtrelemeyi depolama katmanında yaparak ağ trafiğini %80 azaltma.'
+    ],
+    examAppearances: [
+      {
+        exam: 'AWS Certified Data Engineer - Associate (DEA-C01)',
+        frequency: 'Çok Yüksek',
+        typicalQuestion: 'Petabaytlarca mevcut on-premise Hadoop/Spark iş yükünün kod değişikliği olmadan AWS\'ye taşınması ve bütçeyi korumak için Spot düğümlerinin güvenli kullanımı.',
+        whenItIsCorrect: 'Mevcut açık kaynak Spark/Hadoop scriptlerini değiştirmeden çalıştırmak gerektiğinde, özel C++/Python jar bağımlılıkları olduğunda ve Task düğümlerinde Spot ile %80 maliyet tasarrufu hedeflendiğinde.',
+        whenItFails: 'Birkaç megabaytlık veya saatlik basit sunucusuz ETL için EMR kümesi açmak operasyonel ve maliyet aşırılığıdır (AWS Glue veya Python Shell seçilmelidir).',
+        keyHeuristic: 'Core düğümler ASLA Spot yapılmaz (HDFS veri kaybı ve küme çöküşü riski). Sadece Task düğümleri Spot Instance Fleet olarak konfigüre edilir!'
+      }
+    ],
+    alternatives: [
+      { name: 'AWS Glue ETL', provider: 'aws', comparison: 'Glue tamamen sunucusuzdur; EMR ise özel açık kaynak kütüphaneleri ve devasa petabaytlık uzun soluklu işler için daha esnektir.' },
+      { name: 'Google Cloud Dataproc', provider: 'gcp', comparison: 'GCP\'nin 90 saniyede açılan yönetilen Hadoop/Spark servisidir.' }
+    ],
+    primaryUseCases: ['Petabaytlık açık kaynak veri gölü analitiği', 'Makine öğrenmesi özellik mühendisliği (Feature Engineering)', 'On-premise Hadoop/Spark modernizasyonu'],
+    pricingTip: 'Task düğümlerinde Spot Fleets kullanarak maliyeti %70-90 oranında düşürün; küme iş bitince otomatik sonlanacak şekilde (auto-terminate) ayarlanmalıdır.'
+  },
+  {
+    id: 'aws-msk',
+    name: 'Amazon MSK (Managed Streaming for Apache Kafka)',
+    provider: 'aws',
+    category: 'Streaming & Ingestion',
+    badge: 'Native Apache Kafka',
+    summary: 'Apache Kafka istemcileri ve ekosistemi (Kafka Connect, Schema Registry) ile %100 tam uyumlu, kurumsal ölçekte açık kaynak protokol bağımlılığı olan sistemler için AWS tarafından yönetilen Kafka servisidir.',
+    coreFeatures: [
+      'Multi-VPC ve Özel Ağ Entegrasyonu: AWS PrivateLink ve IAM kimlik doğrulaması ile güvenli veri akışı.',
+      'MSK Connect: Debezium CDC konnektörleri ve S3 sink konnektörlerini sunucusuz altyapıda çalıştırma.',
+      'MSK Serverless: Partition ve throughput bazlı otomatik ölçekleme ile broker yönetimi gerektirmeyen mod.',
+      'Depolama Katmanlama (Tiered Storage): Eski verileri broker EBS disklerinden otomatik olarak düşük maliyetli S3 katmanına kaydırma.'
+    ],
+    examAppearances: [
+      {
+        exam: 'AWS Certified Data Engineer - Associate (DEA-C01)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Mevcut on-premise Kafka Connect mimarisini ve 5 MB büyüklüğündeki mesajları değiştirmeden AWS\'ye taşıma zorunluluğu.',
+        whenItIsCorrect: 'Açık kaynak Apache Kafka API uyumluluğu, 1 MB\'tan büyük tekil mesaj paketleri veya mevcut Kafka Connect/Debezium altyapısı talep edildiğinde.',
+        whenItFails: 'Tamamen AWS native, sıfır yönetim ve Kinesis ekosistemi (Kinesis Analytics/Firehose) istendiğinde (Kinesis Streams çok daha hafif ve operasyonsuzdur).',
+        keyHeuristic: '1 MB üzeri mesaj boyutu veya "Mevcut Apache Kafka uygulamaları ile tam kod uyumluluğu" ifadesi = Amazon MSK (Kinesis 1 MB sınırına takılır).'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon Kinesis Data Streams', provider: 'aws', comparison: 'Kinesis AWS yerel servisidir ve max 1 MB mesaj kabul eder; MSK tam Kafka uyumlu ve büyük mesaj destekler.' },
+      { name: 'Google Cloud Pub/Sub', provider: 'gcp', comparison: 'Pub/Sub shard/partition yönetimi gerektirmez.' }
+    ],
+    primaryUseCases: ['Büyük boyutlu mesaj kuyrukları', 'Mikroservisler arası olay akışı', 'Debezium CDC entegrasyonu'],
+    pricingTip: 'Broker\'ları yüksek EBS diskleriyle doldurmak yerine MSK Tiered Storage aktif edilerek veri S3\'te 10 kat ucuza saklanmalıdır.'
+  },
+  {
+    id: 'aws-opensearch',
+    name: 'Amazon OpenSearch Service',
+    provider: 'aws',
+    category: 'Warehouse & Serving',
+    badge: 'Search & Log Analytics',
+    summary: 'Gerçek zamanlı uygulama loglarını analiz etmek, serbest metin (full-text) aramaları gerçekleştirmek ve OpenSearch Dashboards (Kibana) ile görselleştirmek için optimize edilmiş dağıtık arama ve analitik motorudur.',
+    coreFeatures: [
+      'Ters İndeksleme (Inverted Index): Milisaniyeler içinde milyonlarca log kaydında metin ve anahtar kelime eşleşmesi.',
+      'Çok Katmanlı Depolama: Hot (NVMe/SSD), UltraWarm (S3 tabanlı, %90 daha ucuz) ve Cold Storage katmanları.',
+      'OpenSearch Ingestion (OSI): Logstash çalıştırmadan sunucusuz log zenginleştirme ve veri alma.',
+      'Vektör Veritabanı Desteği: RAG (Retrieval-Augmented Generation) ve semantik arama için k-NN eklentisi.'
+    ],
+    examAppearances: [
+      {
+        exam: 'AWS Certified Data Engineer - Associate (DEA-C01)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Güvenlik loglarının gerçek zamanlı analiz edilmesi, serbest metin araması yapılması ve 30 günden eski logların maliyet etkin şekilde saklanarak sorgulanabilmesi.',
+        whenItIsCorrect: 'Log analitiği, metin tabanlı arama (full-text search), Kibana görselleştirme panoları veya ters indeks sorguları istendiğinde.',
+        whenItFails: 'Yapılandırılmış ilişkisel analitik veya SQL tabanlı veri ambarı sorguları için OpenSearch seçilmez (Redshift veya Athena kullanılmalıdır).',
+        keyHeuristic: '"Log analitiği", "serbest metin araması" veya "Kibana panosu" dendiğinde cevap OpenSearch\'tür; SQL veri ambarı veya Parquet göl sorgusu için ise Redshift/Athena\'dır.'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon Redshift', provider: 'aws', comparison: 'Redshift SQL tabanlı sütunlu veri ambarıdır; OpenSearch ters indeksli arama ve log analiz motorudur.' },
+      { name: 'Google Cloud BigQuery', provider: 'gcp', comparison: 'BigQuery SQL analitiğinde üstündür; log metin araması için BigQuery Search Index kullanılır.' }
+    ],
+    primaryUseCases: ['SIEM güvenlik log izleme', 'E-ticaret ürün arama motoru', 'Uygulama APM metrik takibi'],
+    pricingTip: '7 günden eski log indeksleri için Index State Management (ISM) ile veriyi otomatik UltraWarm katmanına aktarın.'
+  },
+  {
+    id: 'aws-orchestration-mwaa-step',
+    name: 'AWS Step Functions vs MWAA (Airflow)',
+    provider: 'aws',
+    category: 'Orchestration & Governance',
+    badge: 'Workflow Orchestration',
+    summary: 'Veri mühendisliğinde boru hattı orkestrasyonu için iki temel yaklaşım: Sunucusuz, olay odaklı durum makineleri için Step Functions; karmaşık, Python tabanlı analitik DAG\'lar için Managed Workflows for Apache Airflow (MWAA).',
+    coreFeatures: [
+      'Step Functions: JSON/ASL tabanlı durum makinesi, Lambda, Glue ve ECS ile yerel SDK entegrasyonu, milisaniye tetikleme, sıfır bekleme maliyeti.',
+      'MWAA: Python tabanlı Apache Airflow DAG\'ları, zengin operatör ekosistemi, dinamik görev oluşturma, multi-cloud ve on-premise orkestrasyonu.',
+      'Hata Yönetimi: Step Functions yerel Retry/Catch blokları; Airflow SLA takibi ve görev bazlı alert mekanizmaları.'
+    ],
+    examAppearances: [
+      {
+        exam: 'AWS Certified Data Engineer - Associate (DEA-C01)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Event-driven olarak milisaniyeler içinde tetiklenen mikroservis iş akışı mı, yoksa onlarca karmaşık veri dönüşüm adımını içeren Python tabanlı zamanlanmış analitik veri hattı mı?',
+        whenItIsCorrect: 'Step Functions = Olay odaklı (event-driven), düşük gecikmeli, sunucusuz boru hatları. MWAA = Karmaşık bağımlılıkları olan, Python koduyla dinamik üretilen, 20+ adımlı analitik veri hatları.',
+        whenItFails: 'Basit bir Lambda + Glue akışı için MWAA açmak maliyet israfıdır (aylık min ~$300 taban ücret). Milisaniye yanıt beklenen API akışlarında MWAA kullanılamaz.',
+        keyHeuristic: 'Sunucusuz, olay odaklı (Event-driven) ve sıfır bekleme maliyeti = Step Functions. Python DAG\'ları, karmaşık zamanlanmış analitik hatlar = MWAA.'
+      }
+    ],
+    alternatives: [
+      { name: 'Google Cloud Composer', provider: 'gcp', comparison: 'GCP\'nin yönetilen Airflow servisidir.' },
+      { name: 'Azure Data Factory Pipelines', provider: 'azure', comparison: 'Görsel sürükle-bırak arayüzlü Azure orkestrasyon aracıdır.' }
+    ],
+    primaryUseCases: ['ETL pipeline orkestrasyonu', 'Makine öğrenmesi eğitim boru hatları', 'Mikroservis saga desenleri'],
+    pricingTip: 'Step Functions Standart modda durum geçişi başına ($0.025/1000 geçiş), Express modda yürütme süresi bazlıdır; MWAA ise ortam boyutu başına saatlik sabit ücretlendirilir.'
+  },
+  {
+    id: 'gcp-dataproc',
+    name: 'Google Cloud Dataproc & Dataproc Serverless',
+    provider: 'gcp',
+    category: 'Compute & Transform',
+    badge: 'Managed Hadoop/Spark',
+    summary: 'Google Cloud üzerinde Apache Spark, Hadoop, Flink ve Presto kümelerini 90 saniyede ayağa kaldıran, Cloud Storage (GCS) ile hesaplama-depolama ayrımı yapan ve Dataproc Serverless ile altyapısız Spark çalıştıran servistir.',
+    coreFeatures: [
+      'Ephemeral (Geçici) Kümeler: İş başladığında açılıp iş tamamlandığında otomatik silinen, HDFS verisi taşımayan kümeler.',
+      'Cloud Storage Entegrasyonu: HDFS yerine gs:// konnektörü ile depolama ve hesaplamanın tamamen ayrılması.',
+      'Preemptible / Spot VM\'ler: İkincil worker düğümlerinde %80\'e varan maliyet tasarrufu.',
+      'Dataproc Serverless: Küme oluşturmadan ve boyutlandırmadan doğrudan Spark batch işi veya interaktif oturum çalıştırma.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Google Cloud Professional Data Engineer (PDE)',
+        frequency: 'Çok Yüksek',
+        typicalQuestion: 'On-premise Hadoop kümesini GCP\'ye en düşük maliyetle ve operasyonel yükle taşırken, mevcut Spark kodunu değiştirmemek için mimari tasarım.',
+        whenItIsCorrect: 'Mevcut açık kaynak Spark/Hadoop iş yükleri taşınırken, özel Python/Java kütüphaneleri gerektiğinde ve veriyi GCS üzerinde saklayıp geçici kümelerle işlemek istendiğinde.',
+        whenItFails: 'Akış veya batch işi Apache Beam ile yazılmışsa veya sıfırdan sunucusuz tasarlanıyorsa Dataproc yerine Dataflow seçilmelidir.',
+        keyHeuristic: 'GCP PDE sınavında Dataproc kümesinde kalıcı HDFS tutmak büyük bir anti-pattern\'dır! Veri GCS\'te saklanır, ephemeral küme açılır, iş bitince küme yok edilir.'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon EMR', provider: 'aws', comparison: 'AWS\'in yönetilen Hadoop/Spark servisidir.' },
+      { name: 'Azure Databricks', provider: 'azure', comparison: 'Gelişmiş kurumsal Spark motoru ve Lakehouse platformudur.' }
+    ],
+    primaryUseCases: ['On-premise Hadoop/Spark modernizasyonu', 'Büyük ölçekli ETL veri dönüştürme', 'Presto ile geçici analitik sorgular'],
+    pricingTip: 'Primary Master düğümünü Standard VM, ikincil worker\'ları Preemptible/Spot VM yaparak maliyeti minimuma indirin.'
+  },
+  {
+    id: 'gcp-spanner',
+    name: 'Google Cloud Spanner',
+    provider: 'gcp',
+    category: 'NoSQL & Operational',
+    badge: 'Global Distributed SQL',
+    summary: 'Küresel ölçekte (multi-region/global) dağıtık, %99.999 kullanılabilirlik SLA\'sı sunan, TrueTime API ile donanımsal atomik saatler kullanarak sınırsız yatay ölçeklenen ve katı ACID garantisi veren ilişkisel veritabanıdır.',
+    coreFeatures: [
+      'TrueTime API: GPS ve atomik saatler ile küresel çapta harici tutarlılık (External Consistency / Serializability).',
+      'Otomatik Sharding: Veri büyüdükçe veya yük arttıkça tabloları Split adı verilen parçalara otomatik bölerek düğümlere dağıtır.',
+      'ANSI SQL Desteği: Dağıtık mimariye rağmen tam ilişkisel SQL sorguları, JOIN\'ler ve ikincil indeksler sunar.',
+      'Sıfır Kesintili Şema Güncellemesi: Canlı üretim ortamında tablo şemasını kilitlemeden (no-lock) güncelleyebilme.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Google Cloud Professional Data Engineer (PDE)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Dünya geneline yayılmış kullanıcılara hizmet veren, finansal düzeyde katı ACID gerektiren, yüksek TPS\'li ve tek bir bölge kesilse bile sıfır veri kaybı (%99.999 SLA) isteyen sistem.',
+        whenItIsCorrect: 'Küresel ölçekte (çok bölgeli) güçlü ACID ilişkisel tutarlılık, yatay ölçeklenen ilişkisel veritabanı veya %99.999 SLA dendiğinde tek doğru cevaptır.',
+        whenItFails: 'Analitik OLAP raporlama için Spanner seçilmez (BigQuery gerekir). Tek bir bölge için standart CRUD iş yükünde Spanner maliyetli kaçar (Cloud SQL yeterlidir).',
+        keyHeuristic: 'Primary Key ardışık artan (sequential - auto-increment, timestamp) seçilirse tüm yazma yükü tek bir Split\'e yığılır (Hotspotting)! Çözüm: Key\'in başına hash veya ters çevrilmiş bayt eklemektir.'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon Aurora Global', provider: 'aws', comparison: 'Aurora okuma replikasyonunda globaldir; Spanner ise hem okuma hem yazmada aktif-aktif küreseldir.' },
+      { name: 'Azure Cosmos DB', provider: 'azure', comparison: 'Cosmos DB NoSQL kökenlidir; Spanner yerel ilişkisel SQL motorudur.' }
+    ],
+    primaryUseCases: ['Küresel finansal işlemler ve bakiye transferleri', 'Global envanter ve rezervasyon sistemleri', 'Çok bölgeli oturum yönetimi'],
+    pricingTip: 'İşlem kapasitesi Node veya Processing Unit (100 PU = 0.1 Node) bazında ücretlendirilir; devasa analitik taramalar için BigQuery federasyonu kullanılmalıdır.'
+  },
+  {
+    id: 'gcp-composer',
+    name: 'Google Cloud Composer (Managed Airflow)',
+    provider: 'gcp',
+    category: 'Orchestration & Governance',
+    badge: 'Fully Managed Airflow',
+    summary: 'Google Cloud üzerinde Apache Airflow tabanlı veri hattı orkestrasyonu sunan, Google Kubernetes Engine (GKE) üzerinde çalışan ve karmaşık multi-cloud veri hatlarını Python DAG\'ları ile yöneten tam yönetilen servistir.',
+    coreFeatures: [
+      'GKE Tabanlı Mimari: Airflow Scheduler, Webserver ve Worker\'ları izole konteyner pod\'ları olarak çalıştırır.',
+      'Celery & Kubernetes Executor: Görevleri KubernetesPodOperator ile izole Docker konteynerlarında çalıştırabilme.',
+      'Çapraz Servis Entegrasyonu: BigQuery, Dataflow, Dataproc ve Cloud Storage operatörleri yerleşik olarak gelir.',
+      'Ortam Değişkenleri ve Gizli Anahtarlar: Secret Manager ve Cloud IAM ile doğrudan güvenli entegrasyon.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Google Cloud Professional Data Engineer (PDE)',
+        frequency: 'Çok Yüksek',
+        typicalQuestion: 'Birbirine bağımlı BigQuery SQL sorguları, Dataflow işleri ve harici SFTP veri aktarımlarının Python tabanlı iş akışları ile zamanlanması ve izlenmesi.',
+        whenItIsCorrect: '"İş akışı orkestrasyonu (Workflow Orchestration)", "Python DAG\'ları", "farklı bulut ve on-premise servislerin sıralı bağımlılıkları" dendiğinde doğru yanıttır.',
+        whenItFails: 'Basit bir dosya geldiğinde tetiklenecek tek adımlı olaylar için Composer açmak maliyet israfıdır (Cloud Functions veya Eventarc seçilmelidir).',
+        keyHeuristic: 'Büyük veri dönüşümünü Airflow worker\'ı içinde çalıştırmak anti-pattern\'dır (OOM hatası verir)! Composer yalnızca orkestratördür, ağır compute BigQuery veya Dataproc\'a delege edilmelidir.'
+      }
+    ],
+    alternatives: [
+      { name: 'AWS MWAA', provider: 'aws', comparison: 'AWS\'in yönetilen Airflow servisidir.' },
+      { name: 'Azure Data Factory', provider: 'azure', comparison: 'Görsel arayüzlü boru hattı orkestrasyon servisidir.' }
+    ],
+    primaryUseCases: ['Kurumsal veri ambarı günlük yükleme hatları', 'Makine öğrenmesi veri hazırlık orkestrasyonu', 'Çapraz sistem veri senkronizasyonu'],
+    pricingTip: 'İş yükü yoğunluğuna göre Composer 2 otomatik ölçeklenen (Autoscaling) worker mimarisini kullanarak boşta kalan kaynak maliyetini engelleyin.'
+  },
+  {
+    id: 'gcp-dataplex',
+    name: 'Google Dataplex (Data Fabric & Governance)',
+    provider: 'gcp',
+    category: 'Orchestration & Governance',
+    badge: 'Intelligent Data Fabric',
+    summary: 'Google Cloud Storage ve BigQuery üzerindeki dağıtık verileri mantıksal olarak organize eden (Lakes & Zones), veriyi taşımadan merkezi veri yönetişimi, otomatik metaveri keşfi ve veri kalitesi denetimi sağlayan Data Fabric servisidir.',
+    coreFeatures: [
+      'Mantıksal Organizasyon: Fiziksel depolamayı (GCS bucket\'ları ve BigQuery dataset\'leri) Lake -> Zone -> Asset hiyerarşisinde birleştirir.',
+      'Otomatik Metadata & Schema Discovery: Veri gölüne düşen CSV, JSON, Parquet dosyalarını tarayarak BigQuery harici tabloları oluşturur.',
+      'Veri Kalitesi (Auto Data Quality): Kod yazmadan YAML kuralları ile null kontrolü, aralık ve format doğrulama raporları üretir.',
+      'Merkezi Güvenlik ve IAM: Tüm göl varlıklarına tek bir noktadan erişim politikası tanımlama.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Google Cloud Professional Data Engineer (PDE)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Farklı departmanların GCS ve BigQuery üzerinde bulunan verilerini tek bir merkezi güvenlik ve veri kalitesi standardına bağlamak (Data Mesh).',
+        whenItIsCorrect: '"Veri yönetişimi (Data Governance)", "merkezi metaveri kataloğu", "veri kalitesi denetimleri (Data Quality)" veya "Data Mesh mimarisi" sorulduğunda doğru cevaptır.',
+        whenItFails: 'Veriyi dönüştürme veya hesaplama motoru olarak Dataplex seçilmez (dönüşüm BigQuery veya Dataflow\'dadır).',
+        keyHeuristic: 'Fiziksel veriyi kopyalamadan veya taşımadan çoklu projelerdeki gölleri mantıksal olarak yönetmek = Google Dataplex.'
+      }
+    ],
+    alternatives: [
+      { name: 'AWS Lake Formation', provider: 'aws', comparison: 'AWS gölleri için merkezi izin ve erişim yönetimi sağlar.' },
+      { name: 'Microsoft Purview', provider: 'azure', comparison: 'Azure ve çoklu bulut veri soykütüğü ve kataloğu servisidir.' }
+    ],
+    primaryUseCases: ['Data Mesh mimarisinde etki alanı (domain) yönetimi', 'Otomatik veri kalitesi skorlaması', 'Kurumsal veri kataloğu ve güvenlik denetimi'],
+    pricingTip: 'Dataplex metadata depolama ve veri kalitesi taramalarında kullanılan Dataplex Shuffle / Compute saatleri üzerinden faturalandırılır.'
+  },
+  {
+    id: 'gcp-storage',
+    name: 'Google Cloud Storage (GCS) & Storage Classes',
+    provider: 'gcp',
+    category: 'Storage & Lakehouse',
+    badge: 'Enterprise Object Storage',
+    summary: 'Google Cloud\'un petabaytlarca yapılandırılmamış ve yarı yapılandırılmış veriyi saklamak için kullandığı, 4 farklı depolama sınıfı ve otomatik yaşam döngüsü kurallarıyla veri göllerinin temel taşı olan nesne depolama servisidir.',
+    coreFeatures: [
+      'Depolama Sınıfları: Standard (sık erişim), Nearline (ayda 1), Coldline (90 günde 1), Archive (yılda 1 erişim).',
+      'Çift Bölge / Çoklu Bölge (Dual-Region / Multi-Region): Otomatik coğrafi yedeklilik ve bölgesel felaket kurtarma (RPO = 0).',
+      'Object Lifecycle Management: Belirli bir günden sonra nesneleri otomatik olarak daha ucuz sınıfa aktarma veya silme.',
+      'Object Versioning & Retention: Yanlışlıkla silinmeye karşı sürümleme ve yasal uyumluluk için WORM (Write Once, Read Many) kilitleme.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Google Cloud Professional Data Engineer (PDE)',
+        frequency: 'Çok Yüksek',
+        typicalQuestion: 'Yılda bir kez denetim için erişilen arşiv loglarının en ucuz maliyetle ve anında milisaniyeler içinde okunabilir saklanması talebi.',
+        whenItIsCorrect: 'Nesne depolama, veri gölü ham katmanı veya uzun vadeli maliyet optimizasyonlu arşivleme senaryolarında doğru cevaptır.',
+        whenItFails: 'İlişkisel sorgulama, satır düzeyinde güncelleme (UPDATE/DELETE) veya yüksek frekanslı transactional veritabanı yerine nesne depolama kullanılmaz.',
+        keyHeuristic: 'GCP Archive sınıfı veriye erişim AWS Glacier gibi saatler sürmez; milisaniye düzeyinde anında erişim sunar, ancak minimum 365 gün saklama taahhüdü vardır.'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon S3', provider: 'aws', comparison: 'AWS\'in nesne depolama servisidir.' },
+      { name: 'Azure Data Lake Storage Gen2', provider: 'azure', comparison: 'Hiyerarşik dizin yapısı sunan Azure nesne depolama servisidir.' }
+    ],
+    primaryUseCases: ['Veri gölü ham (Bronze) iniş alanı', 'Yedekleme ve felaket kurtarma arşivi', 'BigQuery ve Dataproc veri kaynağı'],
+    pricingTip: 'Erken silme cezalarına (Early deletion fee) dikkat edin: Nearline 30 gün, Coldline 90 gün, Archive 365 gün dolmadan silinirse ceza kesilir.'
+  },
+  {
+    id: 'azure-stream-analytics',
+    name: 'Azure Stream Analytics (ASA)',
+    provider: 'azure',
+    category: 'Streaming & Ingestion',
+    badge: 'Serverless Real-Time SQL',
+    summary: 'Azure IoT Hub ve Event Hubs üzerinden akan verileri SQL benzeri bildirimsel sorgularla gerçek zamanlı analiz eden, pencereleme (windowing) fonksiyonları ve anomali tespiti sunan sunucusuz akış işleme servisidir.',
+    coreFeatures: [
+      'SQL Tabanlı Akış Sözdizimi: TumblingWindow, HoppingWindow, SlidingWindow ve SessionWindow operatörleri.',
+      'Sıfır Altyapı Yönetimi: Streaming Units (SU) ölçeğinde kapasite belirleme ve otomatik ölçekleme.',
+      'Çıkış Hedefleri: Power BI canlı panoları, Azure Synapse, Cosmos DB, Blob Storage ve Event Hubs\'a doğrudan aktarım.',
+      'Dahili Makine Öğrenmesi: Tek bir SQL fonksiyonu ile (ANOMALYDETECTION) anomali ve ani artış tespiti.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Azure Data Engineer Associate (DP-203 / DP-700)',
+        frequency: 'Çok Yüksek',
+        typicalQuestion: 'IoT cihazlarından gelen telemetri verisinde her 5 dakikalık kesişmeyen aralıklarla (Tumbling Window) sıcaklık ortalamasının hesaplanıp canlı Power BI panosuna basılması.',
+        whenItIsCorrect: 'SQL kullanarak gerçek zamanlı pencereleme yapmak istendiğinde, IoT Hub verisi tüketilirken veya kod yazmadan canlı Power BI beslemesi gerektiğinde doğru cevaptır.',
+        whenItFails: 'Karmaşık durum yönetimi (stateful processing) veya özel Python kütüphaneleri gerektiren derin akış algoritmalarında ASA sınırlı kalır (Databricks Structured Streaming seçilmelidir).',
+        keyHeuristic: 'Soruda "kesişmeyen sabit aralıklar" diyorsa Tumbling Window; "birbirinin üzerine binen periyodik aralıklar" diyorsa Hopping Window; "etkinlik olduğu sürece devam eden pencere" diyorsa Session Window seçilir.'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon Kinesis Data Analytics', provider: 'aws', comparison: 'AWS üzerindeki yönetilen Apache Flink/SQL akış motorudur.' },
+      { name: 'Google Cloud Dataflow', provider: 'gcp', comparison: 'Apache Beam tabanlı tam yönetilen akış işleme servisidir.' }
+    ],
+    primaryUseCases: ['Canlı IoT telemetri analitiği', 'Gerçek zamanlı dolandırıcılık uyarıları', 'Web tıklama akışından anlık anomali tespiti'],
+    pricingTip: 'Streaming Units (SU) saatlik olarak faturalandırılır; sorguda PARTITION BY PartitionId kullanarak işlerin paralel SU\'lara düzgün dağılması sağlanmalıdır.'
+  },
+  {
+    id: 'azure-cosmos-synapse-link',
+    name: 'Azure Cosmos DB & Synapse Link (HTAP)',
+    provider: 'azure',
+    category: 'NoSQL & Operational',
+    badge: 'Global NoSQL & HTAP',
+    summary: 'Milisaniye tek haneli okuma/yazma gecikmesi sunan küresel dağıtık NoSQL veritabanı ve OLTP verilerini sıfır ETL ile gerçek zamanlı Parquet analitik deposuna (Analytical Store) yansıtan Synapse Link hibrit motorudur.',
+    coreFeatures: [
+      'Çoklu Model ve API: NoSQL (SQL), MongoDB, Cassandra, Gremlin ve Table API desteği.',
+      'Synapse Link (HTAP): İşlem yapılan satırları (Transactional Store) arka planda otomatik ve maliyetsiz olarak sütunlu analitik depoya (Analytical Store) senkronize eder.',
+      'Request Units (RU/s): Kaynak tüketimini tahmin edilebilir RU modeli veya ani trafikler için Autoscale / Serverless mod ile yönetir.',
+      '5 Farklı Tutarlılık Seviyesi: Strong, Bounded Staleness, Session (varsayılan), Consistent Prefix ve Eventual.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Azure Data Engineer Associate (DP-203 / DP-700)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Canlı e-ticaret NoSQL veritabanındaki verileri operasyonel transactional performansı (RU tüketimini) etkilemeden ve ETL boru hattı kurmadan gerçek zamanlı BI raporlarında analiz etme talebi.',
+        whenItIsCorrect: 'Sıfır ETL ile gerçek zamanlı NoSQL analitiği istendiğinde (Cosmos DB Synapse Link) veya küresel düzeyde milisaniye yazma gerektiğinde doğru cevaptır.',
+        whenItFails: 'Büyük analitik raporları doğrudan Cosmos DB Transactional Store üzerinden çalıştırmak operasyonel ve maliyet felaketidir (tüm RU\'lar tükenir ve HTTP 429 hatası alınır).',
+        keyHeuristic: 'Cosmos DB\'deki operasyonel veriyi ETL çalıştırmadan analiz etmek = Cosmos DB Analytical Store + Azure Synapse Link.'
+      }
+    ],
+    alternatives: [
+      { name: 'Amazon DynamoDB + Athena Federation', provider: 'aws', comparison: 'DynamoDB verilerini Athena üzerinden lambda konnektörü ile sorgulama imkanı sunar.' },
+      { name: 'Google Cloud Spanner + BigQuery', provider: 'gcp', comparison: 'Spanner verilerini BigQuery harici tabloları üzerinden federatif sorgulatır.' }
+    ],
+    primaryUseCases: ['Global ölçekli e-ticaret sepet ve sipariş sistemleri', 'Sıfır gecikmeli IoT telemetri kaydı', 'Gerçek zamanlı HTAP analitiği'],
+    pricingTip: 'Analitik sorgular için Transactional RU harcamak yerine ücretsiz etkinleştirilen Analytical Store üzerinden Synapse Serverless SQL ile sorgulama yapın.'
+  },
+  {
+    id: 'azure-purview',
+    name: 'Microsoft Purview (Governance & Lineage)',
+    provider: 'azure',
+    category: 'Orchestration & Governance',
+    badge: 'Unified Data Governance',
+    summary: 'Şirket içi (on-premise), çoklu bulut (AWS, GCP) ve Azure üzerindeki tüm veri varlıklarını otomatik tarayan, veri soykütüğünü (Data Lineage) çıkaran ve hassas verileri (PII) sınıflandıran kurumsal yönetişim platformudur.',
+    coreFeatures: [
+      'Otomatik Veri Taraması: ADLS Gen2, Synapse, SQL Server, Fabric ve hatta AWS S3 bucket\'larındaki şemaları otomatik tarar.',
+      'Uçtan Uca Veri Soykütüğü (Lineage): Bir tablonun hangi Data Factory pipeline\'ından, hangi dönüşümle geçtiğini ve hangi Power BI raporuna beslendiğini grafik olarak çizer.',
+      'Hassas Veri Sınıflandırma: Kredi kartı, TC kimlik / SSN ve sağlık verilerini otomatik tespit edip etiketler.',
+      'Veri Haritası ve Sözlük: İş terimleri sözlüğü (Glossary) ile teknik metaveriyi eşleştirir.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Azure Data Engineer (DP-203 / DP-700 / DP-600)',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Bir finans tablosundaki hatalı verinin hangi kaynak sistemden ve hangi veri dönüşüm aşamalarından geçerek geldiğini (Data Lineage) tespit etme ve PII verilerini otomatik maskeleme gereksinimi.',
+        whenItIsCorrect: '"Data Lineage (veri soykütüğü)", "otomatik veri keşfi ve taraması", "PII/hassas veri etiketleme" veya "kurumsal veri kataloğu" sorulduğunda tek doğru cevaptır.',
+        whenItFails: 'Veri dönüştürme, hesaplama veya veri ambarı görevi üstlenmez (bu işler Fabric veya Synapse\'indir).',
+        keyHeuristic: '"Tablodan Power BI raporuna kadar verinin hangi adımlardan geçtiğini görselleştirme" dendiğinde cevap her zaman Microsoft Purview Data Lineage\'dır.'
+      }
+    ],
+    alternatives: [
+      { name: 'AWS Lake Formation', provider: 'aws', comparison: 'AWS gölleri için merkezi izin ve erişim yönetimi sağlar.' },
+      { name: 'Google Dataplex', provider: 'gcp', comparison: 'GCP Data Fabric ve göl yönetişim servisidir.' }
+    ],
+    primaryUseCases: ['KVKK/GDPR uyumluluk ve denetim raporları', 'Kurumsal veri soykütüğü takibi', 'Çoklu bulut veri varlık envanteri'],
+    pricingTip: 'Taramaları (Scan) sürekli çalıştırmak yerine yalnızca haftalık veya şema değişimlerinde tetiklenecek şekilde zamanlayın.'
+  },
+  {
+    id: 'oss-flink',
+    name: 'Apache Flink (Managed Stream Processing)',
+    provider: 'oss',
+    category: 'Compute & Transform',
+    badge: 'Stateful Stream Processing',
+    summary: 'Dağıtık, durumlu (stateful) akış işleme motoru; mikro-batch yerine gerçek olay bazlı (event-by-event) işleme modeliyle milisaniye altı gecikmeler ve kesinlikle bir kez (exactly-once) semantiği sunar.',
+    coreFeatures: [
+      'Gerçek Akış (Native Streaming): Veriyi küçük yığınlara (micro-batch) bölmez; gelen her kaydı geldiği anda bağımsız bir olay olarak işler.',
+      'RocksDB State Backend: Milyonlarca anahtarın geçmiş durumunu (state) disk üzerinde terabaytlarca boyutta yerel olarak saklayabilme.',
+      'Chandy-Lamport Kontrol Noktaları (Checkpoints): Arıza anında sistemin en son tutarlı durumuna dönmesini sağlayan asenkron bariyer algoritması.',
+      'Event Time & Watermarks: Ağ gecikmesiyle geç gelen verileri (late-arriving data) doğru zaman penceresine yerleştirebilme.'
+    ],
+    examAppearances: [
+      {
+        exam: 'AWS DEA-C01 (Managed Flink) & Databricks DE',
+        frequency: 'Yüksek',
+        typicalQuestion: '10 milisaniyenin altında gecikme gerektiren, son 1 saatlik kullanıcı sepet davranışlarını stateful olarak hafızada tutan ve tam olarak bir kez (exactly-once) hesaplama isteyen dolandırıcılık mimarisi.',
+        whenItIsCorrect: 'Milisaniyenin altında gecikme, karmaşık olay işleme (CEP) veya terabaytlık durumlu (stateful) pencereler istendiğinde doğru yanıttır.',
+        whenItFails: 'Basit saatlik analitik özetler veya klasik batch veri yüklemeleri için Flink kümesi çalıştırmak gereksiz altyapı karmaşıklığıdır.',
+        keyHeuristic: 'Spark Streaming varsayılan olarak micro-batch çalışır ve tipik gecikmesi 100ms-500ms\'dir; sub-second gerçek zamanlı event-by-event işleme gerekiyorsa cevap Apache Flink\'tir.'
+      }
+    ],
+    alternatives: [
+      { name: 'Spark Structured Streaming', provider: 'oss', comparison: 'Spark micro-batch tabanlıdır; kurulumu ve ekosistemi daha yaygındır.' },
+      { name: 'Google Cloud Dataflow', provider: 'gcp', comparison: 'Apache Beam tabanlı tam yönetilen sunucusuz akış motorudur.' }
+    ],
+    primaryUseCases: ['Milisaniyelik sahtekarlık önleme sistemleri', 'Gerçek zamanlı dinamik fiyatlandırma motorları', 'Yüksek frekanslı IoT telemetri analitiği'],
+    pricingTip: 'Checkpoint sıklığını çok kısa tutmak (örn. <1 sn) I/O darboğazı yaratır; kontrol noktası aralığını 10-30 saniye bandında optimize edin.'
+  },
+  {
+    id: 'oss-dbt',
+    name: 'dbt (Data Build Tool)',
+    provider: 'oss',
+    category: 'Compute & Transform',
+    badge: 'Analytics Engineering & ELT',
+    summary: 'Veri ambarları (BigQuery, Snowflake, Redshift, Databricks) içinde SQL tabanlı modüler, sürüm kontrollü, otomatik test edilen ve dokümante edilen ELT dönüşümleri gerçekleştiren modern analitik mühendisliği aracıdır.',
+    coreFeatures: [
+      'ref() Fonksiyonu ile Otomatik DAG: SQL modelleri arasındaki bağımlılıkları otomatik çözer ve paralel çalıştırma grafiği çıkarır.',
+      'Malzemeleştirme Stratejileri (Materializations): view, table, incremental (yalnızca yeni/değişen verileri işleme) ve ephemeral.',
+      'Yerleşik Veri Testleri: not_null, unique, relationships (referential integrity) ve accepted_values testlerini YAML ile tanımlama.',
+      'Otomatik Soykütüğü (Lineage) ve Dokümantasyon: Tek bir komutla (dbt docs generate) tüm veri ambarının interaktif soykütük haritasını çıkarma.'
+    ],
+    examAppearances: [
+      {
+        exam: 'Databricks Certified Data Engineer & GCP PDE',
+        frequency: 'Yüksek',
+        typicalQuestion: 'Veri ambarındaki karmaşık SQL dönüşümlerinin yazılım mühendisliği pratikleriyle (Git CI/CD, birim testleri, modüler refaktörleme) yürütülmesi.',
+        whenItIsCorrect: 'In-warehouse SQL dönüşümü, analitik mühendisliği, otomatik schema doğrulama testleri ve incremental veri güncelleme dendiğinde doğru cevaptır.',
+        whenItFails: 'Ham veriyi dış API\'lerden veya dosyalardan ambarın içine taşıma (Extract & Load) aşamasında dbt kullanılmaz (Fivetran, Airbyte veya Glue gerekir).',
+        keyHeuristic: 'dbt bir ETL aracı değil, ELT aracıdır! Veriyi taşımaz; ambar içine taşınmış veriyi veri ambarının kendi hesaplama motoruyla SQL kullanarak dönüştürür.'
+      }
+    ],
+    alternatives: [
+      { name: 'Google Cloud Dataform', provider: 'gcp', comparison: 'GCP\'nin BigQuery yerel SQL tabanlı dönüşüm ve orkestrasyon aracıdır.' },
+      { name: 'Delta Live Tables (DLT)', provider: 'oss', comparison: 'Databricks üzerinde streaming ve batch için bildirimsel veri hattı motorudur.' }
+    ],
+    primaryUseCases: ['Boyutsal modelleme (Star Schema / Kimball)', 'Artımlı (incremental) veri ambarı tabloları', 'Otomatik veri kalitesi CI/CD boru hatları'],
+    pricingTip: 'Büyük hacimli modellerde table yerine incremental malzeme seçilmeli ve doğru unique_key ile gereksiz ambar compute harcaması engellenmelidir.'
   }
 ];
