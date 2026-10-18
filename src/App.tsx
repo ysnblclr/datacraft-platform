@@ -18,13 +18,27 @@ import { GcpExamGuideHub } from './components/GcpGuide/GcpExamGuideHub';
 
 export function App() {
   const [currentCloud, setCurrentCloud] = useState<CloudProvider>('aws');
-  const [activeTab, setActiveTab] = useState<'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide'>('canvas');
+  const [activeTab, setActiveTab] = useState<'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide'>(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      if (tabParam && ['canvas', 'exam', 'rosetta', 'whatif', 'workbench', 'practices', 'tools', 'gcp_guide'].includes(tabParam)) {
+        return tabParam as 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide';
+      }
+    } catch {
+      // ignore
+    }
+    return 'canvas';
+  });
   const [currentTemplateId, setCurrentTemplateId] = useState<string>(pipelineTemplates[0].id);
   const [selectedRole, setSelectedRole] = useState<NodeRole>('ingestion');
   const [score, setScore] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 });
 
   const [theme, setTheme] = useState<AppTheme>(() => {
     try {
+      const params = new URLSearchParams(window.location.search);
+      const themeParam = params.get('theme');
+      if (themeParam === 'cream' || themeParam === 'dark') return themeParam;
       const saved = localStorage.getItem('datacraft-theme');
       return saved === 'cream' || saved === 'dark' ? saved : 'dark';
     } catch {
@@ -32,10 +46,26 @@ export function App() {
     }
   });
 
+  const handleSelectTab = (tab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide') => {
+    setActiveTab(tab);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', tab);
+      window.history.replaceState({}, '', url.toString());
+    } catch {
+      // ignore
+    }
+  };
+
   useEffect(() => {
     try {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('datacraft-theme', theme);
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('theme')) {
+        url.searchParams.set('theme', theme);
+        window.history.replaceState({}, '', url.toString());
+      }
     } catch {
       // ignore
     }
@@ -97,7 +127,7 @@ export function App() {
         currentCloud={currentCloud}
         onSelectCloud={setCurrentCloud}
         activeTab={activeTab}
-        onSelectTab={setActiveTab}
+        onSelectTab={handleSelectTab}
         score={score}
         theme={theme}
         onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'cream' : 'dark'))}
@@ -187,7 +217,7 @@ export function App() {
               tools={examToolsDirectory}
               onNavigateToExam={(cloud) => {
                 setCurrentCloud(cloud);
-                setActiveTab('exam');
+                handleSelectTab('exam');
               }}
             />
           </div>
@@ -199,7 +229,7 @@ export function App() {
             <GcpExamGuideHub
               onNavigateToExam={() => {
                 setCurrentCloud('gcp');
-                setActiveTab('exam');
+                handleSelectTab('exam');
               }}
             />
           </div>

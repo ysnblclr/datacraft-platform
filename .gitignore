@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+temp_chrome/
+temp_chrome_profile/
