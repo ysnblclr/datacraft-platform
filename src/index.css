@@ -65,181 +65,310 @@
 }
 
 /* ========================================================
-   WARM CREAM THEME (Yenilenmiş Yüksek Kontrastlı Krem Tema)
-   Lüks, sıcak fildişi/parşömen kağıt zemin, net beyaz kartlar,
-   okunabilir koyu mürekkep yazılar ve zengin renkli vurgular.
+   WARM CREAM THEME (Kusursuz Yüksek Kontrastlı Krem Tema)
+   Lüks, sıcak fildişi zemin, beyaz kartlar, zengin koyu mürekkep
+   yazılar ve yüksek kontrastlı renkli vurgular.
    ======================================================== */
 [data-theme="cream"] {
   /* Tailwind Color Tokens */
   --color-slate-950: #fbf9f4; /* Sayfa Zemin: Sıcak fildişi / ivory */
   --color-slate-900: #ffffff; /* Kartlar: Tertemiz beyaz */
-  --color-slate-850: #f4efe6; /* İç Paneller / Tablo başlıkları */
+  --color-slate-850: #f5efe6; /* İç Paneller / Tablo başlıkları */
   --color-slate-800: #ede7dc; /* Vurgulu Zeminler */
   --color-slate-750: #dfd7ca; /* Kenarlıklar */
   --color-slate-700: #cfc5b8;
-  --color-slate-600: #8c7e6d;
-  --color-slate-500: #66594b; /* Okunabilir ikincil metin */
-  --color-slate-400: #4a3f33; /* Okunabilir gövde metni */
-  --color-slate-300: #2b241d; /* Koyu antrasit */
-  --color-slate-200: #1b1713;
-  --color-slate-100: #120f0c; /* En koyu başlık rengi */
-  --color-slate-50: #0a0806;
+  --color-slate-600: #4a3e31;
+  --color-slate-500: #383028; /* İkincil metin */
+  --color-slate-400: #26201a; /* Gövde metni - Koyu net antrasit */
+  --color-slate-300: #1a1512; /* Çok koyu gövde metni */
+  --color-slate-200: #14100d; /* Neredeyse siyah */
+  --color-slate-100: #0a0806; /* En koyu başlık rengi */
+  --color-slate-50: #050403;
 
   background-color: #fbf9f4 !important;
-  color: #1b1713 !important;
+  color: #14100d !important;
 }
 
 [data-theme="cream"] body {
   background-color: #fbf9f4 !important;
-  color: #1b1713 !important;
+  color: #14100d !important;
 }
 
 /* 1. Surfaces & Backgrounds */
-[data-theme="cream"] .bg-slate-950 { background-color: #fbf9f4 !important; }
-[data-theme="cream"] .bg-slate-950\/60 { background-color: rgba(251, 249, 244, 0.75) !important; }
-[data-theme="cream"] .bg-slate-950\/70 { background-color: #f4efe6 !important; }
-[data-theme="cream"] .bg-slate-950\/80 { background-color: #f4efe6 !important; }
-[data-theme="cream"] .bg-slate-950\/90 { background-color: #fbf9f4 !important; }
-[data-theme="cream"] .bg-slate-950\/95 { background-color: #fbf9f4 !important; }
+[data-theme="cream"] .bg-slate-950,
+[data-theme="cream"] [class*="bg-slate-950"] {
+  background-color: #fbf9f4 !important;
+}
 
-/* Primary Cards & Elevated Panels: Pure Warm White with soft crisp border */
-[data-theme="cream"] .bg-slate-900 { background-color: #ffffff !important; }
-[data-theme="cream"] .bg-slate-900\/50 { background-color: #fcfbfa !important; }
-[data-theme="cream"] .bg-slate-900\/60 { background-color: #ffffff !important; }
-[data-theme="cream"] .bg-slate-900\/70 { background-color: #ffffff !important; }
-[data-theme="cream"] .bg-slate-900\/80 { background-color: #ffffff !important; }
-[data-theme="cream"] .bg-slate-900\/90 { background-color: #ffffff !important; }
-[data-theme="cream"] .bg-slate-900\/95 { background-color: #ffffff !important; }
+/* Primary Cards & Elevated Panels */
+[data-theme="cream"] .bg-slate-900,
+[data-theme="cream"] [class*="bg-slate-900"] {
+  background-color: #ffffff !important;
+}
 
 /* Secondary Surfaces / Inner inputs / Nested chips */
-[data-theme="cream"] .bg-slate-800 { background-color: #f4efe6 !important; }
-[data-theme="cream"] .bg-slate-850 { background-color: #ede7dc !important; }
-[data-theme="cream"] .bg-slate-800\/60 { background-color: #f4efe6 !important; }
-[data-theme="cream"] .bg-slate-800\/90 { background-color: #ede7dc !important; }
-
-/* 2. Text Colors (High Contrast Ink & Charcoal) */
-[data-theme="cream"] .text-slate-100 { color: #120f0c !important; }
-[data-theme="cream"] .text-slate-200 { color: #1e1914 !important; }
-[data-theme="cream"] .text-slate-300 { color: #322a21 !important; }
-[data-theme="cream"] .text-slate-400 { color: #584c3e !important; }
-[data-theme="cream"] .text-slate-500 { color: #736453 !important; }
-[data-theme="cream"] .text-slate-600 { color: #877663 !important; }
-
-/* Buttons with text-slate-950 (like active AWS button) must stay dark */
-[data-theme="cream"] .text-slate-950 { color: #120f0c !important; }
-
-/* Standalone headings with text-white become crisp black */
-[data-theme="cream"] h1.text-white,
-[data-theme="cream"] h2.text-white,
-[data-theme="cream"] h3.text-white,
-[data-theme="cream"] h4.text-white,
-[data-theme="cream"] p.text-white,
-[data-theme="cream"] span.text-white:not([class*="bg-"]):not([class*="badge"]) {
-  color: #120f0c !important;
+[data-theme="cream"] .bg-slate-850,
+[data-theme="cream"] [class*="bg-slate-850"],
+[data-theme="cream"] .bg-slate-800,
+[data-theme="cream"] [class*="bg-slate-800"] {
+  background-color: #f5efe6 !important;
 }
 
-/* 3. Button & Badge Text Clarity (Ensure White on Saturated Colors) */
-[data-theme="cream"] button[class*="bg-blue-600"],
-[data-theme="cream"] button[class*="bg-blue-600"] *,
-[data-theme="cream"] button[class*="bg-indigo-600"],
-[data-theme="cream"] button[class*="bg-indigo-600"] *,
-[data-theme="cream"] button[class*="bg-emerald-600"],
-[data-theme="cream"] button[class*="bg-emerald-600"] *,
-[data-theme="cream"] button[class*="bg-purple-600"],
-[data-theme="cream"] button[class*="bg-purple-600"] *,
-[data-theme="cream"] button[class*="bg-amber-600"],
-[data-theme="cream"] button[class*="bg-amber-600"] *,
-[data-theme="cream"] button[class*="bg-cyan-600"],
-[data-theme="cream"] button[class*="bg-cyan-600"] *,
-[data-theme="cream"] button[class*="bg-pink-600"],
-[data-theme="cream"] button[class*="bg-pink-600"] *,
-[data-theme="cream"] span[class*="bg-blue-600"],
-[data-theme="cream"] span[class*="bg-emerald-600"],
-[data-theme="cream"] span[class*="bg-indigo-600"],
-[data-theme="cream"] span[class*="bg-purple-600"] {
-  color: #ffffff !important;
+/* 2. Clean Distinct Borders */
+[data-theme="cream"] .border-slate-700,
+[data-theme="cream"] [class*="border-slate-700"],
+[data-theme="cream"] .border-slate-750,
+[data-theme="cream"] [class*="border-slate-750"],
+[data-theme="cream"] .border-slate-800,
+[data-theme="cream"] [class*="border-slate-800"],
+[data-theme="cream"] .border-slate-900,
+[data-theme="cream"] [class*="border-slate-900"] {
+  border-color: #dfd7ca !important;
 }
 
-/* 4. Saturated Accents on Light Cream (Darkened so they are never washed out) */
+/* 3. Typography & Text Colors (High Contrast Deep Charcoal & Ink) */
+[data-theme="cream"] h1,
+[data-theme="cream"] h2,
+[data-theme="cream"] h3,
+[data-theme="cream"] h4,
+[data-theme="cream"] h5,
+[data-theme="cream"] h6,
+[data-theme="cream"] strong,
+[data-theme="cream"] b,
+[data-theme="cream"] th {
+  color: #0a0806 !important;
+}
+
+[data-theme="cream"] .text-slate-50,
+[data-theme="cream"] [class*="text-slate-50"] { color: #0a0806 !important; }
+
+[data-theme="cream"] .text-slate-100,
+[data-theme="cream"] [class*="text-slate-100"] { color: #0a0806 !important; }
+
+[data-theme="cream"] .text-slate-200,
+[data-theme="cream"] [class*="text-slate-200"] { color: #14100d !important; }
+
+[data-theme="cream"] .text-slate-300,
+[data-theme="cream"] [class*="text-slate-300"] { color: #1c1815 !important; }
+
+[data-theme="cream"] .text-slate-400,
+[data-theme="cream"] [class*="text-slate-400"] { color: #383028 !important; }
+
+[data-theme="cream"] .text-slate-500,
+[data-theme="cream"] [class*="text-slate-500"] { color: #4e4337 !important; }
+
+[data-theme="cream"] .text-slate-600,
+[data-theme="cream"] [class*="text-slate-600"] { color: #615446 !important; }
+
+[data-theme="cream"] .text-slate-700,
+[data-theme="cream"] [class*="text-slate-700"] { color: #2a231d !important; }
+
+[data-theme="cream"] .text-slate-800,
+[data-theme="cream"] [class*="text-slate-800"] { color: #1a1512 !important; }
+
+[data-theme="cream"] .text-slate-900,
+[data-theme="cream"] [class*="text-slate-900"],
+[data-theme="cream"] .text-slate-950,
+[data-theme="cream"] [class*="text-slate-950"] { color: #0a0806 !important; }
+
+/* In Cream mode, elements with text-white become deep black ink by default */
+[data-theme="cream"] .text-white,
+[data-theme="cream"] [class*="text-white"] {
+  color: #0a0806 !important;
+}
+
+/* Prevent hover states from making text white or invisible on light background */
+[data-theme="cream"] [class*="hover:text-white"]:hover,
+[data-theme="cream"] [class*="hover:text-slate-100"]:hover,
+[data-theme="cream"] [class*="hover:text-slate-200"]:hover,
+[data-theme="cream"] [class*="hover:text-slate-300"]:hover {
+  color: #0a0806 !important;
+}
+
+[data-theme="cream"] [class*="hover:bg-slate-800"]:hover,
+[data-theme="cream"] [class*="hover:bg-slate-750"]:hover,
+[data-theme="cream"] [class*="hover:bg-slate-700"]:hover,
+[data-theme="cream"] [class*="hover:bg-slate-900"]:hover {
+  background-color: #ede7dc !important;
+  color: #0a0806 !important;
+}
+
+/* 4. Form inputs, dropdowns, and search fields */
+[data-theme="cream"] input,
+[data-theme="cream"] select,
+[data-theme="cream"] textarea {
+  color: #0a0806 !important;
+  background-color: #ffffff !important;
+  border-color: #dfd7ca !important;
+}
+
+[data-theme="cream"] select option {
+  color: #0a0806 !important;
+  background-color: #ffffff !important;
+}
+
+[data-theme="cream"] input::placeholder,
+[data-theme="cream"] textarea::placeholder {
+  color: #695c4f !important;
+}
+
+/* 5. Rich, Saturated Colored Accents (Prevent washed out pastel text) */
+/* Blue: Deep rich cobalt */
+[data-theme="cream"] .text-blue-100,
+[data-theme="cream"] .text-blue-200,
+[data-theme="cream"] .text-blue-300,
 [data-theme="cream"] .text-blue-400,
-[data-theme="cream"] .text-blue-300 {
-  color: #1d4ed8 !important; /* Rich Cobalt Blue */
-}
-[data-theme="cream"] .text-indigo-400,
-[data-theme="cream"] .text-indigo-300 {
-  color: #4338ca !important; /* Deep Indigo */
-}
-[data-theme="cream"] .text-emerald-400,
-[data-theme="cream"] .text-emerald-300 {
-  color: #047857 !important; /* Deep Forest Emerald */
-}
-[data-theme="cream"] .text-amber-400,
-[data-theme="cream"] .text-amber-300 {
-  color: #b45309 !important; /* Deep Warm Amber */
-}
-[data-theme="cream"] .text-purple-400,
-[data-theme="cream"] .text-purple-300 {
-  color: #6d28d9 !important; /* Royal Deep Purple */
-}
-[data-theme="cream"] .text-red-400,
-[data-theme="cream"] .text-red-300 {
-  color: #b91c1c !important; /* Deep Crimson */
-}
-[data-theme="cream"] .text-cyan-400,
-[data-theme="cream"] .text-cyan-300 {
-  color: #0e7490 !important; /* Deep Ocean Cyan */
+[data-theme="cream"] .text-blue-500,
+[data-theme="cream"] [class*="text-blue-100"],
+[data-theme="cream"] [class*="text-blue-200"],
+[data-theme="cream"] [class*="text-blue-300"],
+[data-theme="cream"] [class*="text-blue-400"],
+[data-theme="cream"] [class*="text-blue-500"] {
+  color: #1d4ed8 !important;
 }
 
-/* 5. Tinted Cards & Badges in Cream Theme */
+/* Indigo: Deep royal indigo */
+[data-theme="cream"] .text-indigo-100,
+[data-theme="cream"] .text-indigo-200,
+[data-theme="cream"] .text-indigo-300,
+[data-theme="cream"] .text-indigo-400,
+[data-theme="cream"] .text-indigo-500,
+[data-theme="cream"] [class*="text-indigo-100"],
+[data-theme="cream"] [class*="text-indigo-200"],
+[data-theme="cream"] [class*="text-indigo-300"],
+[data-theme="cream"] [class*="text-indigo-400"],
+[data-theme="cream"] [class*="text-indigo-500"] {
+  color: #3730a3 !important;
+}
+
+/* Emerald: Deep forest emerald */
+[data-theme="cream"] .text-emerald-100,
+[data-theme="cream"] .text-emerald-200,
+[data-theme="cream"] .text-emerald-300,
+[data-theme="cream"] .text-emerald-400,
+[data-theme="cream"] .text-emerald-500,
+[data-theme="cream"] [class*="text-emerald-100"],
+[data-theme="cream"] [class*="text-emerald-200"],
+[data-theme="cream"] [class*="text-emerald-300"],
+[data-theme="cream"] [class*="text-emerald-400"],
+[data-theme="cream"] [class*="text-emerald-500"] {
+  color: #047857 !important;
+}
+
+/* Amber: Deep warm golden amber */
+[data-theme="cream"] .text-amber-100,
+[data-theme="cream"] .text-amber-200,
+[data-theme="cream"] .text-amber-300,
+[data-theme="cream"] .text-amber-400,
+[data-theme="cream"] .text-amber-500,
+[data-theme="cream"] [class*="text-amber-100"],
+[data-theme="cream"] [class*="text-amber-200"],
+[data-theme="cream"] [class*="text-amber-300"],
+[data-theme="cream"] [class*="text-amber-400"],
+[data-theme="cream"] [class*="text-amber-500"] {
+  color: #b45309 !important;
+}
+
+/* Purple: Deep royal purple / plum */
+[data-theme="cream"] .text-purple-100,
+[data-theme="cream"] .text-purple-200,
+[data-theme="cream"] .text-purple-300,
+[data-theme="cream"] .text-purple-400,
+[data-theme="cream"] .text-purple-500,
+[data-theme="cream"] [class*="text-purple-100"],
+[data-theme="cream"] [class*="text-purple-200"],
+[data-theme="cream"] [class*="text-purple-300"],
+[data-theme="cream"] [class*="text-purple-400"],
+[data-theme="cream"] [class*="text-purple-500"] {
+  color: #6b21a8 !important;
+}
+
+/* Red: Deep crimson red */
+[data-theme="cream"] .text-red-100,
+[data-theme="cream"] .text-red-200,
+[data-theme="cream"] .text-red-300,
+[data-theme="cream"] .text-red-400,
+[data-theme="cream"] .text-red-500,
+[data-theme="cream"] [class*="text-red-100"],
+[data-theme="cream"] [class*="text-red-200"],
+[data-theme="cream"] [class*="text-red-300"],
+[data-theme="cream"] [class*="text-red-400"],
+[data-theme="cream"] [class*="text-red-500"] {
+  color: #b91c1c !important;
+}
+
+/* Cyan: Deep ocean cyan */
+[data-theme="cream"] .text-cyan-100,
+[data-theme="cream"] .text-cyan-200,
+[data-theme="cream"] .text-cyan-300,
+[data-theme="cream"] .text-cyan-400,
+[data-theme="cream"] .text-cyan-500,
+[data-theme="cream"] [class*="text-cyan-100"],
+[data-theme="cream"] [class*="text-cyan-200"],
+[data-theme="cream"] [class*="text-cyan-300"],
+[data-theme="cream"] [class*="text-cyan-400"],
+[data-theme="cream"] [class*="text-cyan-500"] {
+  color: #0e7490 !important;
+}
+
+/* 6. Tinted Soft Backgrounds */
+[data-theme="cream"] [class*="bg-blue-950"] {
+  background-color: #eff6ff !important;
+  border-color: #93c5fd !important;
+}
+[data-theme="cream"] [class*="bg-indigo-950"] {
+  background-color: #eef2ff !important;
+  border-color: #a5b4fc !important;
+}
+[data-theme="cream"] [class*="bg-emerald-950"] {
+  background-color: #f0fdf4 !important;
+  border-color: #86efac !important;
+}
+[data-theme="cream"] [class*="bg-red-950"] {
+  background-color: #fef2f2 !important;
+  border-color: #fca5a5 !important;
+}
+[data-theme="cream"] [class*="bg-amber-950"] {
+  background-color: #fffbeb !important;
+  border-color: #fcd34d !important;
+}
+[data-theme="cream"] [class*="bg-purple-950"] {
+  background-color: #faf5ff !important;
+  border-color: #d8b4fe !important;
+}
+
+/* Pill badges with /10 and /20 opacity */
 [data-theme="cream"] [class*="bg-blue-500/10"],
 [data-theme="cream"] [class*="bg-blue-500/20"] {
-  background-color: #ebf3ff !important;
+  background-color: #eff6ff !important;
   border-color: #bfdbfe !important;
 }
-
 [data-theme="cream"] [class*="bg-indigo-500/10"],
-[data-theme="cream"] [class*="bg-indigo-500/20"],
-[data-theme="cream"] .bg-indigo-950\/40,
-[data-theme="cream"] .bg-indigo-950\/30 {
+[data-theme="cream"] [class*="bg-indigo-500/20"] {
   background-color: #eef2ff !important;
   border-color: #c7d2fe !important;
 }
-
 [data-theme="cream"] [class*="bg-emerald-500/10"],
-[data-theme="cream"] [class*="bg-emerald-500/20"],
-[data-theme="cream"] .bg-emerald-950\/20,
-[data-theme="cream"] .bg-emerald-950\/30 {
+[data-theme="cream"] [class*="bg-emerald-500/20"] {
   background-color: #f0fdf4 !important;
   border-color: #bbf7d0 !important;
 }
-
 [data-theme="cream"] [class*="bg-amber-500/10"],
 [data-theme="cream"] [class*="bg-amber-500/20"],
-[data-theme="cream"] [class*="bg-amber-400/20"],
-[data-theme="cream"] .bg-amber-950\/20,
-[data-theme="cream"] .bg-amber-950\/30 {
+[data-theme="cream"] [class*="bg-amber-400/20"] {
   background-color: #fffbeb !important;
   border-color: #fde68a !important;
 }
-
 [data-theme="cream"] [class*="bg-purple-500/10"],
 [data-theme="cream"] [class*="bg-purple-500/20"] {
   background-color: #faf5ff !important;
   border-color: #e9d5ff !important;
 }
-
 [data-theme="cream"] [class*="bg-red-500/10"],
 [data-theme="cream"] [class*="bg-red-500/20"],
-[data-theme="cream"] [class*="bg-red-500/30"],
-[data-theme="cream"] .bg-red-950\/15,
-[data-theme="cream"] .bg-red-950\/20 {
+[data-theme="cream"] [class*="bg-red-500/30"] {
   background-color: #fef2f2 !important;
   border-color: #fecaca !important;
-}
-
-[data-theme="cream"] .bg-blue-950\/40 {
-  background-color: #eff6ff !important;
-  border-color: #bfdbfe !important;
 }
 
 /* Hero gradient cards in Cream Mode */
@@ -248,32 +377,98 @@
   border-color: #dbe4f0 !important;
 }
 
-/* 6. Clean Distinct Borders */
-[data-theme="cream"] .border-slate-700 { border-color: #cfc5b8 !important; }
-[data-theme="cream"] .border-slate-750 { border-color: #dfd7ca !important; }
-[data-theme="cream"] .border-slate-800 { border-color: #e5ded3 !important; }
-[data-theme="cream"] .border-slate-800\/60 { border-color: #e8e2d8 !important; }
-[data-theme="cream"] .border-slate-800\/80 { border-color: #dfd7ca !important; }
-[data-theme="cream"] .border-slate-800\/90 { border-color: #dfd7ca !important; }
-[data-theme="cream"] .border-slate-900 { border-color: #e5ded3 !important; }
+/* 7. Solid Saturated Colored Buttons & Badges (ALWAYS PRESERVE PURE WHITE TEXT) */
+[data-theme="cream"] .bg-blue-600,
+[data-theme="cream"] .bg-blue-600 *,
+[data-theme="cream"] .bg-blue-500,
+[data-theme="cream"] .bg-blue-500 *,
+[data-theme="cream"] .bg-indigo-600,
+[data-theme="cream"] .bg-indigo-600 *,
+[data-theme="cream"] .bg-indigo-500,
+[data-theme="cream"] .bg-indigo-500 *,
+[data-theme="cream"] .bg-emerald-600,
+[data-theme="cream"] .bg-emerald-600 *,
+[data-theme="cream"] .bg-emerald-500,
+[data-theme="cream"] .bg-emerald-500 *,
+[data-theme="cream"] .bg-purple-600,
+[data-theme="cream"] .bg-purple-600 *,
+[data-theme="cream"] .bg-purple-500,
+[data-theme="cream"] .bg-purple-500 *,
+[data-theme="cream"] .bg-amber-600,
+[data-theme="cream"] .bg-amber-600 *,
+[data-theme="cream"] .bg-red-600,
+[data-theme="cream"] .bg-red-600 *,
+[data-theme="cream"] .bg-red-500,
+[data-theme="cream"] .bg-red-500 *,
+[data-theme="cream"] .bg-cyan-600,
+[data-theme="cream"] .bg-cyan-600 *,
+[data-theme="cream"] .bg-pink-600,
+[data-theme="cream"] .bg-pink-600 *,
+[data-theme="cream"] .bg-violet-600,
+[data-theme="cream"] .bg-violet-600 *,
+[data-theme="cream"] [class*="bg-blue-600"],
+[data-theme="cream"] [class*="bg-blue-600"] *,
+[data-theme="cream"] [class*="bg-indigo-600"],
+[data-theme="cream"] [class*="bg-indigo-600"] *,
+[data-theme="cream"] [class*="bg-emerald-600"],
+[data-theme="cream"] [class*="bg-emerald-600"] *,
+[data-theme="cream"] [class*="bg-purple-600"],
+[data-theme="cream"] [class*="bg-purple-600"] *,
+[data-theme="cream"] [class*="bg-amber-600"],
+[data-theme="cream"] [class*="bg-amber-600"] *,
+[data-theme="cream"] [class*="bg-red-600"],
+[data-theme="cream"] [class*="bg-red-600"] *,
+[data-theme="cream"] [class*="bg-cyan-600"],
+[data-theme="cream"] [class*="bg-cyan-600"] *,
+[data-theme="cream"] [class*="bg-pink-600"],
+[data-theme="cream"] [class*="bg-pink-600"] *,
+[data-theme="cream"] [class*="bg-emerald-600/80"],
+[data-theme="cream"] [class*="bg-emerald-600/80"] * {
+  color: #ffffff !important;
+}
 
-/* 7. Code Blocks & Tables */
-[data-theme="cream"] pre,
-[data-theme="cream"] code {
-  background-color: #f6f2ea !important;
+[data-theme="cream"] [class*="bg-blue-600"]:hover *,
+[data-theme="cream"] [class*="bg-blue-500"]:hover *,
+[data-theme="cream"] [class*="bg-indigo-600"]:hover *,
+[data-theme="cream"] [class*="bg-emerald-600"]:hover *,
+[data-theme="cream"] [class*="bg-purple-600"]:hover *,
+[data-theme="cream"] [class*="bg-amber-600"]:hover *,
+[data-theme="cream"] [class*="bg-red-600"]:hover * {
+  color: #ffffff !important;
+}
+
+/* 8. Code Blocks & Tables */
+[data-theme="cream"] pre {
+  background-color: #f5efe6 !important;
   color: #191512 !important;
-  border-color: #ded5c7 !important;
+  border-color: #dfd7ca !important;
+}
+
+[data-theme="cream"] code {
+  background-color: #f3ece1 !important;
+  color: #1e3a8a !important; /* Readable dark navy for inline code */
+  border-color: #dfd7ca !important;
 }
 
 [data-theme="cream"] table thead tr {
-  background-color: #f4efe6 !important;
+  background-color: #f5efe6 !important;
+}
+
+[data-theme="cream"] table thead th {
+  color: #0a0806 !important;
+  border-bottom: 2px solid #dfd7ca !important;
 }
 
 [data-theme="cream"] table tbody tr:hover {
-  background-color: #fbf8f2 !important;
+  background-color: #fbf7f0 !important;
 }
 
-/* 8. Scrollbars */
+[data-theme="cream"] table tbody td {
+  color: #1c1815 !important;
+  border-bottom: 1px solid #ede7dc !important;
+}
+
+/* 9. Scrollbars */
 [data-theme="cream"] ::-webkit-scrollbar-track {
   background: #fbf9f4;
 }
@@ -284,7 +479,7 @@
   background: #b5a895;
 }
 
-/* 9. React Flow Canvas */
+/* 10. React Flow Canvas */
 [data-theme="cream"] .react-flow {
   background-color: #fbf9f4 !important;
 }

@@ -178,7 +178,7 @@ export const PipelineCanvas: React.FC<PipelineCanvasProps> = ({
           <select
             value={currentTemplate.id}
             onChange={(e) => onSelectTemplate(e.target.value)}
-            className="text-[11px] sm:text-xs bg-slate-950 border border-slate-750 text-white rounded-xl px-2.5 py-1.5 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm truncate max-w-[200px] sm:max-w-none"
+            className="text-[11px] sm:text-xs bg-slate-950 border border-slate-750 text-slate-100 rounded-xl px-2.5 py-1.5 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm truncate max-w-[200px] sm:max-w-none"
           >
             {templates.map((t) => (
               <option key={t.id} value={t.id}>

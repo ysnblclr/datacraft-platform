@@ -99,7 +99,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
             <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm shrink-0">
               📖
             </span>
-            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <h3 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight flex items-center gap-2">
               Sınav Araçları & Tool Ansiklopedisi
             </h3>
             <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-500/10 text-purple-300 border border-purple-500/20">
@@ -130,7 +130,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
             placeholder="Araç adı, özellik, sınav sorusu veya kavram ara..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
         </div>
 
@@ -139,7 +139,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
           <select
             value={selectedProvider}
             onChange={(e) => setSelectedProvider(e.target.value)}
-            className="w-full text-xs bg-slate-900 border border-slate-800 text-white rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full text-xs bg-slate-900 border border-slate-800 text-slate-100 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             <option value="ALL">Tüm Bulutlar (AWS, GCP, Azure, OSS)</option>
             <option value="aws">Amazon Web Services (AWS)</option>
@@ -154,7 +154,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full text-xs bg-slate-900 border border-slate-800 text-white rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full text-xs bg-slate-900 border border-slate-800 text-slate-100 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             <option value="ALL">Tüm Mimari Katmanlar</option>
             <option value="Streaming & Ingestion">Streaming & Ingestion</option>
@@ -171,7 +171,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
           <select
             value={selectedExamFilter}
             onChange={(e) => setSelectedExamFilter(e.target.value)}
-            className="w-full text-xs bg-slate-900 border border-slate-800 text-white rounded-xl px-2 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 font-semibold"
+            className="w-full text-xs bg-slate-900 border border-slate-800 text-slate-100 rounded-xl px-2 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 font-semibold"
           >
             <option value="ALL">Tüm Sınavlar</option>
             <option value="DEA-C01">AWS DEA-C01</option>
@@ -254,7 +254,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
                       </span>
                     </div>
 
-                    <h4 className="text-xs font-bold text-white leading-snug mb-1">
+                    <h4 className="text-xs font-bold text-slate-100 leading-snug mb-1">
                       {tool.name}
                     </h4>
                     <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
@@ -329,13 +329,13 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
               )}
             </div>
 
-            <h2 className="text-lg sm:text-xl font-black text-white mb-2">
+            <h2 className="text-lg sm:text-xl font-black text-slate-100 mb-2">
               {activeTool.name}
             </h2>
 
             {/* Summary Box */}
             <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed">
-              <span className="font-bold text-white block mb-1">📌 Ne İşe Yarar? (Genel Tanım):</span>
+              <span className="font-bold text-slate-100 block mb-1">📌 Ne İşe Yarar? (Genel Tanım):</span>
               {activeTool.summary}
             </div>
           </div>
@@ -436,7 +436,7 @@ export const ToolEncyclopedia: React.FC<ToolEncyclopediaProps> = ({
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="font-bold text-white text-[11px]">{alt.name}</span>
+                      <span className="font-bold text-slate-100 text-[11px]">{alt.name}</span>
                       <span
                         className={`text-[9px] uppercase px-1.5 py-0.2 rounded font-bold border ${getProviderBadge(
                           alt.provider

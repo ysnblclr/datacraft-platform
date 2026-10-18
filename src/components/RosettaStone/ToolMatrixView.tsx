@@ -26,7 +26,7 @@ export const ToolMatrixView: React.FC<ToolMatrixViewProps> = ({ tools }) => {
       {/* Header & Search */}
       <div className="border-b border-slate-800 pb-5 mb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+          <h3 className="text-base font-bold text-slate-100 tracking-tight flex items-center gap-2">
             🗺️ Çapraz Bulut Rosetta Stone Matrisi
           </h3>
           <p className="text-xs text-slate-400 mt-0.5">
@@ -43,7 +43,7 @@ export const ToolMatrixView: React.FC<ToolMatrixViewProps> = ({ tools }) => {
               placeholder="Araç, servis veya kavram ara..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-950 border border-slate-750 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-950 border border-slate-750 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
@@ -51,7 +51,7 @@ export const ToolMatrixView: React.FC<ToolMatrixViewProps> = ({ tools }) => {
           <select
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
-            className="text-xs bg-slate-950 border border-slate-750 text-white rounded-xl px-3 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 w-full sm:w-auto"
+            className="text-xs bg-slate-950 border border-slate-750 text-slate-100 rounded-xl px-3 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 w-full sm:w-auto"
           >
             <option value="ALL">Tüm Katmanlar</option>
             <option value="ingestion">Ingestion & Streaming</option>
@@ -90,7 +90,7 @@ export const ToolMatrixView: React.FC<ToolMatrixViewProps> = ({ tools }) => {
                   </span>
                 </div>
 
-                <h4 className="text-sm font-bold text-white mb-1">
+                <h4 className="text-sm font-bold text-slate-100 mb-1">
                   {tool.name}
                 </h4>
                 <p className="text-xs text-slate-400 leading-relaxed mb-3">

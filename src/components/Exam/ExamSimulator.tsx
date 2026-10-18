@@ -191,7 +191,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-white tracking-tight">
+              <h3 className="text-sm font-bold text-slate-100 tracking-tight">
                 Sertifikasyon Soru & Senaryo Laboratuvarı
               </h3>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-indigo-600 text-white">
@@ -272,7 +272,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
           <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
             <div className="flex items-center gap-2">
               <Grid className="w-4 h-4 text-indigo-400" />
-              <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-slate-100 uppercase tracking-wider">
                 1.000+ Soru Kütüphanesi & Hızlı Gezgin
               </h4>
               <span className="text-[10px] text-slate-400">
@@ -297,7 +297,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
                 placeholder="Konu, servis veya senaryoda ara (ör: Kinesis, Iceberg, BigLake, Auto Loader)..."
                 value={navSearch}
                 onChange={(e) => setNavSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -306,7 +306,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
               <select
                 value={navDifficulty}
                 onChange={(e) => setNavDifficulty(e.target.value)}
-                className="w-full text-xs bg-slate-900 border border-slate-800 text-white rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full text-xs bg-slate-900 border border-slate-800 text-slate-100 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="ALL">Tüm Zorluklar</option>
                 <option value="Temel">Temel Seviye</option>
@@ -324,7 +324,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
                 placeholder={`1 - ${filteredQuestions.length}`}
                 value={jumpInput}
                 onChange={(e) => setJumpInput(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-center"
+                className="w-full px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-center"
               />
               <button
                 type="submit"
@@ -483,7 +483,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
         </p>
 
         {/* Prompt */}
-        <p className="text-xs md:text-sm font-bold text-white flex items-center gap-2">
+        <p className="text-xs md:text-sm font-bold text-slate-100 flex items-center gap-2">
           <ChevronRight className="w-4 h-4 text-indigo-400 shrink-0" />
           {currentQ.prompt}
         </p>
@@ -497,8 +497,8 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
 
           if (isSelected) {
             borderClass = opt.isCorrect
-              ? 'border-emerald-500 bg-emerald-950/30 text-white ring-2 ring-emerald-500/30'
-              : 'border-red-500 bg-red-950/30 text-white ring-2 ring-red-500/30';
+              ? 'border-emerald-500 bg-emerald-950/30 text-emerald-950 dark:text-emerald-100 ring-2 ring-emerald-500/30'
+              : 'border-red-500 bg-red-950/30 text-red-950 dark:text-red-100 ring-2 ring-red-500/30';
           }
 
           return (
@@ -617,7 +617,7 @@ export const ExamSimulator: React.FC<ExamSimulatorProps> = ({
               value={jumpInput || String(currentIndex + 1)}
               onFocus={() => setJumpInput(String(currentIndex + 1))}
               onChange={(e) => setJumpInput(e.target.value)}
-              className="w-14 px-1.5 py-1 rounded-lg bg-slate-950 border border-slate-750 text-center font-mono font-bold text-white text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-14 px-1.5 py-1 rounded-lg bg-slate-950 border border-slate-750 text-center font-mono font-bold text-slate-100 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </form>
           <span>/ {filteredQuestions.length.toLocaleString('tr-TR')}</span>

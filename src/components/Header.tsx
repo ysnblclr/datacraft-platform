@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <h1 className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
+                <h1 className="text-base sm:text-lg font-bold tracking-tight text-slate-100 flex items-center gap-1.5">
                   DataCraft
                   <span className="text-[10px] sm:text-[11px] font-semibold px-1.5 py-0.2 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
                     DE Studio
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
               ) : (
                 <>
                   <Moon className="w-3.5 h-3.5 text-indigo-400" />
-                  <span className="hidden sm:inline font-medium text-slate-800">Koyu Tema</span>
+                  <span className="hidden sm:inline font-medium text-slate-100">Koyu Tema</span>
                 </>
               )}
             </button>

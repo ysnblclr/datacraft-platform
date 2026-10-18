@@ -28,7 +28,7 @@ export const NodeInspector: React.FC<NodeInspectorProps> = ({
         <div className="flex items-center justify-between mb-3 border-b border-slate-800 pb-3">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-100">
               Bileşen Analizi & Rosetta Stone
             </h4>
           </div>
@@ -39,7 +39,7 @@ export const NodeInspector: React.FC<NodeInspectorProps> = ({
 
         {/* Current Active Tool Info */}
         <div className="mb-4">
-          <div className="text-sm font-bold text-white mb-0.5">
+          <div className="text-sm font-bold text-slate-100 mb-0.5">
             {currentServiceName}
           </div>
           <p className="text-xs text-slate-400 leading-relaxed">

@@ -48,7 +48,7 @@ export const WhatIfLab: React.FC = () => {
       {/* Header */}
       <div className="border-b border-slate-800 pb-4 mb-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div>
-          <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+          <h3 className="text-base font-bold text-slate-100 tracking-tight flex items-center gap-2">
             🎛️ "What-If" Kapasite & Maliyet Simülatörü
           </h3>
           <p className="text-xs text-slate-400 mt-0.5">
@@ -192,7 +192,7 @@ export const WhatIfLab: React.FC = () => {
               <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">AWS Toplam TCO</span>
               <span className="text-base">📦</span>
             </div>
-            <div className="text-2xl font-black text-white mb-2">
+            <div className="text-2xl font-black text-slate-100 mb-2">
               ${awsTotalCost} <span className="text-xs font-normal text-slate-400">/ay</span>
             </div>
             <div className="space-y-1.5 text-[11px] text-slate-400 border-t border-slate-800 pt-2">
@@ -222,7 +222,7 @@ export const WhatIfLab: React.FC = () => {
               <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">GCP Toplam TCO</span>
               <span className="text-base">🌐</span>
             </div>
-            <div className="text-2xl font-black text-white mb-2">
+            <div className="text-2xl font-black text-slate-100 mb-2">
               ${gcpTotalCost} <span className="text-xs font-normal text-slate-400">/ay</span>
             </div>
             <div className="space-y-1.5 text-[11px] text-slate-400 border-t border-slate-800 pt-2">
@@ -252,7 +252,7 @@ export const WhatIfLab: React.FC = () => {
               <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">Azure Fabric TCO</span>
               <span className="text-base">🔷</span>
             </div>
-            <div className="text-2xl font-black text-white mb-2">
+            <div className="text-2xl font-black text-slate-100 mb-2">
               ${azureTotalCost} <span className="text-xs font-normal text-slate-400">/ay</span>
             </div>
             <div className="space-y-1.5 text-[11px] text-slate-400 border-t border-slate-800 pt-2">
@@ -282,7 +282,7 @@ export const WhatIfLab: React.FC = () => {
               <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Açık Kaynak (Self-Host)</span>
               <span className="text-base">🐧</span>
             </div>
-            <div className="text-2xl font-black text-white mb-2">
+            <div className="text-2xl font-black text-slate-100 mb-2">
               ${ossTotalCost} <span className="text-xs font-normal text-slate-400">/ay</span>
             </div>
             <div className="space-y-1.5 text-[11px] text-slate-400 border-t border-slate-800 pt-2">

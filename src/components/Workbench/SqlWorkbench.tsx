@@ -133,7 +133,7 @@ export const SqlWorkbench: React.FC = () => {
       {/* Header */}
       <div className="border-b border-slate-800 pb-4 mb-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div>
-          <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+          <h3 className="text-base font-bold text-slate-100 tracking-tight flex items-center gap-2">
             💻 Data Engineering SQL & Lakehouse Workbench
           </h3>
           <p className="text-xs text-slate-400 mt-0.5">
@@ -194,7 +194,7 @@ export const SqlWorkbench: React.FC = () => {
         <div className="bg-slate-900/80 px-4 py-2.5 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
           <div className="flex items-center gap-2">
             <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-            <span>Sorgu Başarıyla Çalıştı: <b className="text-white">{executedResults.rows.length} Satır</b></span>
+            <span>Sorgu Başarıyla Çalıştı: <b className="text-slate-100">{executedResults.rows.length} Satır</b></span>
           </div>
           <span className="text-slate-500 font-mono text-[11px]">
             {executedResults.executionTimeMs} ms (In-Memory Engine) · <span className="text-emerald-400 font-sans">Tabloyu yana kaydırabilirsiniz →</span>

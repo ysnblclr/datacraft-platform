@@ -154,7 +154,7 @@ export function App() {
             {/* Live Reacting Canvas (5 cols) */}
             <div className="lg:col-span-5 flex flex-col min-h-[550px]">
               <div className="mb-2 flex items-center justify-between text-xs text-slate-400">
-                <span className="font-semibold text-white">Canlı Mimari Reaksiyonu:</span>
+                <span className="font-semibold text-slate-100">Canlı Mimari Reaksiyonu:</span>
                 <span>Seçilen şıkka göre düğümler anlık güncellenir</span>
               </div>
               <div className="flex-1">

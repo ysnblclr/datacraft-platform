@@ -87,7 +87,7 @@ export const DataNode: React.FC<DataNodeProps> = ({ data }) => {
 
       {/* Service Name & Subtitle */}
       <div className="mb-2 sm:mb-2.5">
-        <h4 className="text-xs sm:text-sm font-black text-white tracking-tight">
+        <h4 className="text-xs sm:text-sm font-black text-slate-100 tracking-tight">
           {data.serviceName}
         </h4>
         <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 mt-0.5 line-clamp-1">
