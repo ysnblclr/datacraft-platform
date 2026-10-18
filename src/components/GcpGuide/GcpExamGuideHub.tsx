@@ -89,6 +89,18 @@ function FormattedMarkdown({ content }: { content: string }) {
             </div>
           );
         }
+        // Numbered list
+        if (/^\d+\.\s/.test(trimmed)) {
+          const numMatch = trimmed.match(/^(\d+\.)\s+(.*)$/);
+          if (numMatch) {
+            return (
+              <div key={idx} className="flex items-start gap-2 pl-2 my-0.5">
+                <span className="text-blue-400 font-mono font-bold text-[11px] shrink-0 mt-0.5">{numMatch[1]}</span>
+                <span className="flex-1">{renderInlineLinksAndBold(numMatch[2])}</span>
+              </div>
+            );
+          }
+        }
         // Indented list / note
         if (line.startsWith('    ')) {
           return (
@@ -114,10 +126,10 @@ function FormattedMarkdown({ content }: { content: string }) {
   );
 }
 
-// Helper to render markdown links [text](url) and **bold**
+// Helper to render markdown links [text](url), **bold**, and `code`
 function renderInlineLinksAndBold(text: string): React.ReactNode {
-  // Regex to match [text](url) or **bold**
-  const regex = /(\[.*?\]\(.*?\)|\*\*.*?\*\*)/g;
+  // Regex to match [text](url), **bold**, or `code`
+  const regex = /(\[.*?\]\(.*?\)|\*\*.*?\*\*|`.*?`)/g;
   const parts = text.split(regex);
 
   return parts.map((part, i) => {
@@ -143,6 +155,13 @@ function renderInlineLinksAndBold(text: string): React.ReactNode {
         <strong key={i} className="font-bold text-white">
           {part.slice(2, -2)}
         </strong>
+      );
+    }
+    if (part.startsWith('`') && part.endsWith('`') && part.length > 2) {
+      return (
+        <code key={i} className="px-1.5 py-0.2 rounded bg-slate-800 border border-slate-700/60 text-blue-300 font-mono text-[11px]">
+          {part.slice(1, -1)}
+        </code>
       );
     }
     return part;
