@@ -1,12 +1,12 @@
 import React from 'react';
 import { CloudProvider, AppTheme } from '../types';
-import { Layers, HelpCircle, Table2, Sliders, Terminal, Award, BookOpen, Sun, Moon } from 'lucide-react';
+import { Layers, HelpCircle, Table2, Sliders, Terminal, Award, BookOpen, Sun, Moon, Compass } from 'lucide-react';
 
 interface HeaderProps {
   currentCloud: CloudProvider;
   onSelectCloud: (cloud: CloudProvider) => void;
-  activeTab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools';
-  onSelectTab: (tab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools') => void;
+  activeTab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide';
+  onSelectTab: (tab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide') => void;
   score: { correct: number; total: number };
   theme: AppTheme;
   onToggleTheme: () => void;
@@ -171,6 +171,21 @@ export const Header: React.FC<HeaderProps> = ({
             Sınav Araçları
             <span className="px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-bold">
               30 DE
+            </span>
+          </button>
+
+          <button
+            onClick={() => onSelectTab('gcp_guide')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
+              activeTab === 'gcp_guide'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Compass className="w-3.5 h-3.5 text-blue-400" />
+            GCP Rehberi
+            <span className="px-1.5 py-0.2 rounded-full bg-blue-400/20 text-blue-300 text-[10px] font-bold">
+              2024-26
             </span>
           </button>
 

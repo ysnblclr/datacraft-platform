@@ -14,10 +14,11 @@ import { BestPracticesLab } from './components/BestPractices/BestPracticesLab';
 import { productionBestPractices } from './data/bestPracticesData';
 import { ToolEncyclopedia } from './components/ToolDirectory/ToolEncyclopedia';
 import { examToolsDirectory } from './data/toolDirectoryData';
+import { GcpExamGuideHub } from './components/GcpGuide/GcpExamGuideHub';
 
 export function App() {
   const [currentCloud, setCurrentCloud] = useState<CloudProvider>('aws');
-  const [activeTab, setActiveTab] = useState<'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools'>('canvas');
+  const [activeTab, setActiveTab] = useState<'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools' | 'gcp_guide'>('canvas');
   const [currentTemplateId, setCurrentTemplateId] = useState<string>(pipelineTemplates[0].id);
   const [selectedRole, setSelectedRole] = useState<NodeRole>('ingestion');
   const [score, setScore] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 });
@@ -186,6 +187,18 @@ export function App() {
               tools={examToolsDirectory}
               onNavigateToExam={(cloud) => {
                 setCurrentCloud(cloud);
+                setActiveTab('exam');
+              }}
+            />
+          </div>
+        )}
+
+        {/* VIEW: GCP PDE Sınav Rehberi & Karar Portalı (2024-2026) */}
+        {activeTab === 'gcp_guide' && (
+          <div className="w-full">
+            <GcpExamGuideHub
+              onNavigateToExam={() => {
+                setCurrentCloud('gcp');
                 setActiveTab('exam');
               }}
             />

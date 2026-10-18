@@ -181,3 +181,53 @@ export interface ExamToolDeepDive {
 
 export type AppTheme = 'dark' | 'cream';
 
+export type GcpServiceCategory = 
+  | 'storage_formats' 
+  | 'databases' 
+  | 'warehouse_analytics' 
+  | 'streaming_processing' 
+  | 'governance_security' 
+  | 'migration_ops';
+
+export interface GcpPdeServiceGuide {
+  id: string;
+  name: string;
+  category: GcpServiceCategory;
+  categoryLabel: string;
+  officialDocLink: string;
+  summary: string;
+  deepDiveSections: {
+    title: string;
+    points: string[];
+    gotchasOrLimitations?: string[];
+  }[];
+  examTraps: string[];
+  goldenHeuristic: string;
+  year20242025Updates: string[];
+}
+
+export interface GcpDecisionScenario {
+  id: string;
+  scenario: string;
+  criteriaBadge: string;
+  chosenService: string;
+  serviceCategory: string;
+  whyCorrect: string;
+  distractors: {
+    service: string;
+    reason: string;
+  }[];
+  goldenRule: string;
+}
+
+export interface GcpPdePublicationReview {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  url: string;
+  focusArea: string;
+  summary: string;
+  actionableExamTips: string[];
+}
+
