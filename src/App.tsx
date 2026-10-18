@@ -12,10 +12,12 @@ import { WhatIfLab } from './components/Simulator/WhatIfLab';
 import { SqlWorkbench } from './components/Workbench/SqlWorkbench';
 import { BestPracticesLab } from './components/BestPractices/BestPracticesLab';
 import { productionBestPractices } from './data/bestPracticesData';
+import { ToolEncyclopedia } from './components/ToolDirectory/ToolEncyclopedia';
+import { examToolsDirectory } from './data/toolDirectoryData';
 
 export function App() {
   const [currentCloud, setCurrentCloud] = useState<CloudProvider>('aws');
-  const [activeTab, setActiveTab] = useState<'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices'>('canvas');
+  const [activeTab, setActiveTab] = useState<'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools'>('canvas');
   const [currentTemplateId, setCurrentTemplateId] = useState<string>(pipelineTemplates[0].id);
   const [selectedRole, setSelectedRole] = useState<NodeRole>('ingestion');
   const [score, setScore] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 });
@@ -154,6 +156,19 @@ export function App() {
         {activeTab === 'practices' && (
           <div className="w-full">
             <BestPracticesLab practices={productionBestPractices} />
+          </div>
+        )}
+
+        {/* VIEW: Sınav Araçları Ansiklopedisi & Soru Analizleri */}
+        {activeTab === 'tools' && (
+          <div className="w-full">
+            <ToolEncyclopedia
+              tools={examToolsDirectory}
+              onNavigateToExam={(cloud) => {
+                setCurrentCloud(cloud);
+                setActiveTab('exam');
+              }}
+            />
           </div>
         )}
 

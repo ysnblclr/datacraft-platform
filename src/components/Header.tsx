@@ -1,12 +1,12 @@
 import React from 'react';
 import { CloudProvider } from '../types';
-import { Layers, HelpCircle, Table2, Sliders, Terminal, Award } from 'lucide-react';
+import { Layers, HelpCircle, Table2, Sliders, Terminal, Award, BookOpen } from 'lucide-react';
 
 interface HeaderProps {
   currentCloud: CloudProvider;
   onSelectCloud: (cloud: CloudProvider) => void;
-  activeTab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices';
-  onSelectTab: (tab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices') => void;
+  activeTab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools';
+  onSelectTab: (tab: 'canvas' | 'exam' | 'rosetta' | 'whatif' | 'workbench' | 'practices' | 'tools') => void;
   score: { correct: number; total: number };
 }
 
@@ -134,6 +134,21 @@ export const Header: React.FC<HeaderProps> = ({
                 {score.correct}/{score.total}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => onSelectTab('tools')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
+              activeTab === 'tools'
+                ? 'bg-amber-600 text-white shadow-md shadow-amber-500/20 font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+            Sınav Araçları
+            <span className="px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-bold">
+              16 DE
+            </span>
           </button>
 
           <button

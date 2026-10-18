@@ -153,3 +153,28 @@ export interface ProductionBestPractice {
   antiPatternWarning: string;
   tags: string[];
 }
+
+export interface ExamToolDeepDive {
+  id: string;
+  name: string;
+  provider: CloudProvider;
+  category: 'Streaming & Ingestion' | 'Storage & Lakehouse' | 'Compute & Transform' | 'Warehouse & Serving' | 'Orchestration & Governance' | 'NoSQL & Operational';
+  badge: string;
+  summary: string;
+  coreFeatures: string[];
+  examAppearances: {
+    exam: string;
+    frequency: 'Çok Yüksek' | 'Yüksek' | 'Orta';
+    typicalQuestion: string;
+    whenItIsCorrect: string;
+    whenItFails: string;
+    keyHeuristic: string;
+  }[];
+  alternatives: {
+    name: string;
+    provider: CloudProvider;
+    comparison: string;
+  }[];
+  primaryUseCases: string[];
+  pricingTip: string;
+}
